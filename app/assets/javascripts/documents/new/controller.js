@@ -3,9 +3,9 @@
 
     angular.module("PANAH-APP")
         .controller("newDocumentController",newDocumentController);
-        newDocumentController.$inject=[];
+        newDocumentController.$inject=['DocumentFactory'];
 
-        function newDocumentController(){
+        function newDocumentController(DocumentFactory){
             var newdoc = this;
 
             newdoc.decisions = [
@@ -22,9 +22,12 @@
                  
             }
             newdoc.submit = function(){
+                // DocumentFactory.create(newdoc.data, function(res){
+                //     console.log(res);
+                // });
                 newdoc.flowdata.opts.target ="/api/v1/post/upload/";
-                newdoc.flowdata.opts.singleFile = true;
-                console.log(newdoc.flowdata);
+                // newdoc.flowdata.opts.singleFile = true;
+                console.log('wrking');
                 newdoc.flowdata.upload()  
             }
 

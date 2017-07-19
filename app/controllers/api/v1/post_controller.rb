@@ -1,5 +1,8 @@
 class Api::V1::PostController < ApplicationController
 
+	def create
+		render json: {wow: :ah}	
+	end
 
 	def upload
 		status = 200
@@ -66,13 +69,18 @@ class Api::V1::PostController < ApplicationController
 	# Build final file
 	def combine_file!
 		@datafilename = params[:flowFilename];
-
+		p "combine...."
+		p "combine...."
+		p "combine...."
 		# Ensure required paths exist
 		FileUtils.mkpath final_file_directory
 		# Open final file in append mode
 		File.open(final_file_path, "a") do |f|
 			file_chunks.each do |file_chunk_path|
 				# Write each chunk to the permanent file
+				p "writing.."
+				p "writing.."
+				p "writing.."
 				f.write File.read(file_chunk_path)
 			end
 		end
