@@ -1,0 +1,162 @@
+<div class="box box-success">
+    
+    <div class="box-header"><b>New Document</b></div>
+    <div class="box-body">
+        <div class="row">
+            <div class="col-md-12">
+                <div flow-init="{target: '/api/v1/post/upload'}"
+                     flow-files-submitted="$flow.upload()"
+                     flow-file-success="$file.msg = $message">
+
+                  <input type="file" flow-btn/>
+                  Input OR Other element as upload button
+                  <span class="btn" flow-btn>Upload File</span>
+
+                  <table>
+                    <tr ng-repeat="file in $flow.files">
+                        <td>{{$index+1}}</td>
+                        <td>{{file.name}}</td>
+                        <td>{{file.msg}}</td>
+                    </tr>
+                  </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="form-group">
+                    <label for="">Title</label>
+                    <input type="text" class="form-control" placeholder="Title" ng-model="data.title">
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+
+                <div class="form-group">
+                    <label for="">Subject Matter</label>
+                    <input type="text" class="form-control" placeholder="Subject Matter" ng-model="data.subject">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="">Abstract</label>
+                <textarea ui-tinymce="newdoc.tinymceOptions" ng-model="data.abstract"></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <label for="">Body</label>
+                <textarea ui-tinymce="newdoc.tinymceOptions" ng-model="data.body"></textarea>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Author</label>
+                    <input type="text" class="form-control" placeholder="Author" ng-model="data.author">
+                </div>
+            </div>
+           <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Case Number</label>
+                    <input type="text" class="form-control" placeholder="Case Number" ng-model="data.case_number">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Parties</label>
+                    <input type="text" class="form-control" placeholder="Party Name" ng-model="data.parties[0]">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">&nbsp;</label>
+                    <input type="text" class="form-control" placeholder="Party Name" ng-model="data.parties[1]">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">&nbsp;</label>
+                    <input type="text" class="form-control" placeholder="Party Name" ng-model="data.parties[2]">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Promulgation Date</label>
+                    <input type="text" class="form-control" placeholder="Party Name" ng-model="data.promulgation_date">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="">Decision</label>
+                    <select class="form-control" ng-model="data.decision" ng-options="a.value as a.label for a in newdoc.decisions">
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Tags</label>
+                    <input type="text" class="form-control" placeholder="Tag">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="form-group">
+                   tags content
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label for="">Attachment</label>
+                    <div 
+                        flow-init
+                        flow-name="newdoc.flowdata">
+                        <input type="file" flow-btn/>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                
+            </div>
+        </div>
+        <div class="row">
+            
+            <div class="col-md-12">
+                <b>Links</b>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="label"> 
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="link"> 
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <button class="btn btn-success">Add</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button class="btn btn-primary" ng-click="newdoc.submit();">SUBMIT</button>
+            </div>
+        </div>
+        
+    </div>
+</div>

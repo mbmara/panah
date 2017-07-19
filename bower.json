@@ -1,0 +1,35 @@
+{
+  "name": "mlmApp",
+  "description": "social online networking site",
+  "main": "index.html",
+  "authors": [
+    "tearhear18 <tearhear18@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "mlm",
+    "online",
+    "network",
+    "ramel",
+    "tearhear18"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.6.5",
+    "angular-ui-router": "^1.0.5",
+    "AdminLTE": "adminlte#^2.3.11",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "jquery-slimscroll": "slimScroll#^1.3.8",
+    "jquery-ui": "*",
+    "angular-ui-tinymce": "^0.0.19",
+    "ng-flow": "~2"
+  }
+}

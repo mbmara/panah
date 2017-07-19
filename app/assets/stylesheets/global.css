@@ -1,0 +1,13 @@
+.user-tag{
+	background:#222d32;
+	text-align: center;
+	padding:2px 0 0 0;
+}
+section.content{
+    background: #ecf0f5;
+    height: calc(100vh - 101px);
+    overflow: auto;
+}
+.logo .logo-mini img, .logo .logo-lg img{
+    height: 40px;
+}
