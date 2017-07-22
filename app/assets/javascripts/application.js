@@ -8,4 +8,7 @@
 //= require tinymce/tinymce.min
 //= require angular-ui-tinymce
 //= require ng-flow/dist/ng-flow-standalone.min
+//= require ngstorage
+//= require angular-notify
+//= require angularjs-datepicker
 //= require_tree .

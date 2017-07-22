@@ -70,7 +70,9 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="">Promulgation Date</label>
-                    <input type="text" class="form-control" placeholder="Party Name" ng-model="newdoc.data.promulgation_date">
+                    <datepicker date-format="yyyy-MM-dd">
+                      <input class="form-control pull-right" ng-model="newdoc.data.promulgation_date" placeholder="Promulgation date" type="text"/>
+                    </datepicker>
                 </div>
             </div>
             <div class="col-md-6">
@@ -82,33 +84,35 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="form-group">
                     <label for="">Tags</label>
-                    <input type="text" class="form-control" placeholder="Tag">
+                    <form ng-submit="newdoc.addtag(newdoc.tag)">
+                        <input type="text" class="form-control" ng-model="newdoc.tag" placeholder="Tag">
+                    </form>
                 </div>
+                <ul class="tags">
+                    <li style="background: #ddd;padding:5px;display: inline-block;border-radius: 10px;margin-right: 10px;margin-top: 5px;" ng-repeat="tag in newdoc.data.tags track by $index">{{tag}}</li>
+                </ul>
             </div>
-            <div class="col-md-8">
-                <div class="form-group">
-                   tags content
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="form-group">
+            <div class="col-md-6">
+               <div class="form-group">
                     <label for="">Attachment</label>
                     <div 
                         flow-init
+                        flow-file-progress="newdoc.progress( $file, $flow )"
+                        flow-file-added="newdoc.added( $file, $event, $flow )"
                         flow-name="newdoc.flowdata">
-                        <input type="file" flow-btn/>
+                        <span class="btn btn-default" flow-btn>Upload File
+                        <input type="file" multiple="multiple" style="visibility: hidden; position:absolute;"></span>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-8">
-                
+                <div class="pdf_wrapper" ng-repeat="c in newdoc.file_content">
+                    <i class="fa fa-file-pdf-o"></i> <span style="font-size:12px">{{c.name}}</span>
+                </div>
             </div>
         </div>
+       
         <div class="row">
             
             <div class="col-md-12">

@@ -12,17 +12,17 @@
 
 ActiveRecord::Schema.define(version: 20170719051943) do
 
-  create_table "attachments", force: :cascade do |t|
+  create_table "attachments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "attachment"
-    t.integer "post_id"
-    t.integer "user_id"
+    t.bigint "post_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_attachments_on_post_id"
     t.index ["user_id"], name: "index_attachments_on_user_id"
   end
 
-  create_table "offices", force: :cascade do |t|
+  create_table "offices", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "acronym"
     t.string "document_types"
@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 20170719051943) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.integer "user_id"
+  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "user_id"
     t.string "title"
     t.text "body"
+    t.text "abstract"
     t.string "tags"
     t.integer "status"
     t.datetime "reviewed_at"
@@ -42,6 +43,7 @@ ActiveRecord::Schema.define(version: 20170719051943) do
     t.string "promulgation_date"
     t.string "case_number"
     t.string "document_type"
+    t.string "decision"
     t.string "links"
     t.string "subject"
     t.string "parties"
@@ -50,20 +52,20 @@ ActiveRecord::Schema.define(version: 20170719051943) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "user_types", force: :cascade do |t|
+  create_table "user_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.boolean "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "fname"
     t.string "lname"
     t.string "mname"
     t.string "email"
     t.string "password"
-    t.integer "user_type_id"
+    t.bigint "user_type_id"
     t.integer "office_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

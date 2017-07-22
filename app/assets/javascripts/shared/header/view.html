@@ -20,14 +20,14 @@
 							<p>RC</p>
 						</div>
 
-						<span class="hidden-xs">RAMEL</span>
+						<span class="hidden-xs">{{$ctrl.name}}</span>
 					</a>
 					<ul class="dropdown-menu">
 						<!-- User image -->
 						<li class="user-header">
 							<img src="images/logo.jpg" class="img-circle" alt="User Image">
 							<p>
-								Ramel Cabug-os
+								{{$ctrl.name}}
 								<small>Member since 2017</small>
 							</p>
 						</li>
@@ -36,7 +36,7 @@
 							<div id="status">
 							</div>
 							<div class="pull-left">
-								<!-- <a class="btn btn-default btn-flat">Account Settings</a> -->
+								<a class="btn btn-default btn-flat" ui-sref="user.profile({id:$ctrl.user_id})">Profile</a>
 							</div>
 							<div class="pull-right">
 								<a  ng-click="$ctrl.logout()" class="btn btn-default btn-flat">Sign out</a>

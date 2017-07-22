@@ -16,7 +16,7 @@ User.create({
 	lname: 'Ramel',
 	mname: 'Pakig',
 	email: "tearhear18@gmail.com",
-	password: '123123',
+	password: '4297F44B13955235245',
 	user_type_id: 4,
 	office_id: 1
 })

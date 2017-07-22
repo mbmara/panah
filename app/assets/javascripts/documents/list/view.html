@@ -7,19 +7,21 @@
             <table class="table table-bordered table-striped">
                 <thead>
                     <tr>
-                        <th>Author</th>
                         <th>Title</th>
                         <th>Status</th>
-                        <th>Promulgation Date</th>                
-                                        
+                        <th>Promulgation Date</th>                 
+                                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="a in [1,2,34,5]">
+                    <tr ng-repeat="a in $ctrl.documents">
+                        <td>{{a.title}}</td>
                         <td>sample</td>
-                        <td>sample</td>
-                        <td>sample</td>
-                        <td>sample</td>
+                        <td>{{a.promulgation_date | date:'MMM dd, yyyy'}}</td>
+                        <td class="text-right">
+                            <button class="btn btn-danger btn-xs" ng-click="$ctrl.deleteDoc(a.id,$index)">Delete</button>
+                            <button class="btn btn-success btn-xs" ui-sref="document.show({id:a.id})">View</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>

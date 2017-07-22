@@ -1,0 +1,77 @@
+new<div class="box box-success">
+    
+    <div class="box-header"><b>New Document</b></div>
+    <div class="box-body">
+        <form ng-submit="newuser.create( newuser.data )">
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    <label for="">First Name</label>
+                    <input type="text" class="form-control" placeholder="First Name" ng-model="newuser.data.fname">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+
+                <div class="form-group">
+                    <label for="">Last Name</label>
+                    <input type="text" class="form-control" placeholder="Last Name" ng-model="newuser.data.lname">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+
+                <div class="form-group">
+                    <label for="">Middle Name</label>
+                    <input type="text" class="form-control" placeholder="Middle Name" ng-model="newuser.data.mname">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    <label for="">Email Address</label>
+                    <input type="email" class="form-control" placeholder="Email Address" ng-model="newuser.data.email">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+
+                <div class="form-group">
+                    <label for="">Password</label>
+                    <input type="password" class="form-control" placeholder="* * * * * *" ng-model="newuser.data.password">
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+
+                <div class="form-group">
+                    <label for="">Confirm Password</label>
+                    <input type="password" class="form-control" placeholder="* * * * * *" ng-model="newuser.data.password2">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <div class="form-group">
+                    <label for="">User Role</label>
+                    <select type="text" class="form-control" ng-model="newuser.data.user_type" ng-options="a.id as a.name for a in newuser.types">
+                        <option value="" disabled selected hidden>-Select Type-</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-4">
+
+                <div class="form-group">
+                    <label for="">Office</label>
+                    <select type="text" class="form-control" ng-model="newuser.data.office">
+                        <option value="" selected disabled hidden>-Select Office-</option>
+                    </select>
+                </div>
+            </div>
+         
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">SUBMIT</button>
+            </div>
+        </div>
+        </form>
+    </div>
+</div>

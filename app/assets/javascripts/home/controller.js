@@ -12,8 +12,6 @@
 
 			var home = this;
 
-			home.user = "ramel";
-
 
 		}
 

@@ -6,11 +6,20 @@
 		.controller("headerController",headerController);
 
 		//Dependency
-		headerController.$inject = [];
+		headerController.$inject = ['UserFactory','$timeout'];
 
-		function headerController(){
+		function headerController(UserFactory, $timeout){
             var vm = this;
+            $timeout( function(){
+            	vm.name = UserFactory.name;
+            	vm.user_id = UserFactory.user_id;
+            },500)
 
-            vm.name = "ramel";
+            vm.logout = logout;
+
+            function logout(){
+            	UserFactory.logout();
+            }
+            
 		}
 })()

@@ -1,7 +1,15 @@
 'use strict';
 
 /** just a comment **/
-angular.module('PANAH-APP',['ui.router','templates','ui.tinymce','flow'])
+angular.module('PANAH-APP',[
+	'ui.router',
+	'templates',
+	'ui.tinymce',
+	'flow', 
+	'ngStorage',
+    'cgNotify',
+    '720kb.datepicker',
+])
 	.config(['$stateProvider','$urlRouterProvider','$locationProvider', router]);
 
 	function router($stateProvider, $urlRouterProvider, $locationProvider){

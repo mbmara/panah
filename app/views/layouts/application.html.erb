@@ -9,12 +9,17 @@
     	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
   	</head>
 	
-	<body class="hold-transition skin-blue sidebar-mini fixed">
-		<div class="wrapper">
+	<body  class="hold-transition skin-blue sidebar-mini fixed">
+		<div panah-initialize="secure" class="wrapper" style="display:none">
 			<panah-header></panah-header>
 			<panah-sidenav></panah-sidenav>
 			<panah-body></panah-body>
 			<panah-footer></panah-footer>
+
 		</div>
+		<user-login panah-initialize="login" style="display:none" ></user-login>
 	</body>
+
+	
+</body>
 </html>

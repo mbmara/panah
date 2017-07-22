@@ -11,3 +11,21 @@ section.content{
 .logo .logo-mini img, .logo .logo-lg img{
     height: 40px;
 }
+.tags{
+	list-style: none;
+	padding: 0;
+}
+.tags li{
+	background: rgba(0,0,0,0.6)
+	padding:5px;
+	display: inline;
+}
+.pdf_wrapper{
+	display: inline-block;
+	font-size: 30px;
+	border:1px solid #ddd;
+	padding: 5px;
+	border-radius: 0 10px 0 0;
+	margin-right: 5px;
+	background: #eee;
+}

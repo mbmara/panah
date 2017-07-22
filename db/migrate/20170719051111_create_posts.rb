@@ -4,6 +4,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
     	t.belongs_to :user
       	t.string :title
       	t.text :body
+        t.text :abstract
       	t.string :tags
       	t.integer :status
       	t.datetime :reviewed_at
@@ -11,6 +12,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       	t.string :promulgation_date
       	t.string :case_number
       	t.string :document_type
+        t.string :decision
         t.string :links
         t.string :subject
         t.string :parties

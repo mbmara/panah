@@ -1,7 +1,39 @@
 class Api::V1::PostController < ApplicationController
+	before_action :validate_session, except:[:login]
 
+	def index
+		@posts = Post.all
+		
+	end
+	def delete
+		Post.delete params[:id]
+		json_response true,"deleted"
+	end
+	def show
+		@post = Post.find params[:id]
+		json_response true,@post
+	end
 	def create
-		render json: {wow: :ah}	
+		ActiveRecord::Base.transaction do
+			doc = Post.new
+			doc.title 		= document_params[:title]
+			doc.subject 	= document_params[:subject]
+			doc.abstract 	= document_params[:abstract].to_s.html_safe
+			doc.body 		= document_params[:body].to_s.html_safe
+			doc.author 		= document_params[:author]
+			doc.case_number = document_params[:case_number]
+			doc.parties 	= document_params[:parties]
+			doc.tags 		= document_params[:tags]
+			doc.promulgation_date = document_params[:promulgation_date]
+			doc.decision = document_params[:decision]
+
+			if doc.save
+				json_response true,doc.id
+			else
+				json_response false,doc.errors
+			end
+		end
+		
 	end
 
 	def upload
@@ -35,8 +67,12 @@ class Api::V1::PostController < ApplicationController
 
 	private
 
+	def document_params
+		params.require(:document).permit(:title, :subject, :abstract, :body, :author, :case_number, :promulgation_date, :decision,parties:[],tags:[])
+	end
+
 	def save_file!
-	# Ensure required paths exist
+		# Ensure required paths exist
 		FileUtils.mkpath chunk_file_directory
 			
 		FileUtils.mv params['file'].tempfile, chunk_file_path, force: true
@@ -59,7 +95,7 @@ class Api::V1::PostController < ApplicationController
 	##
 	# Build final file
 	def combine_file!
-		@datafilename = params[:flowFilename];
+		@datafilename = "#{Time.now.to_i}_#{params[:flowFilename]}";
 		
 		# Ensure required paths exist
 		FileUtils.mkpath final_file_directory
@@ -70,6 +106,8 @@ class Api::V1::PostController < ApplicationController
 				f.write File.read(file_chunk_path)
 			end
 		end		
+		FileUtils.rm_rf chunk_file_directory
+		Attachment.create({post_id:params[:post_id],user_id:@user.id,attachment:@datafilename})
 	end
 
 	def final_file_path
@@ -88,7 +126,5 @@ class Api::V1::PostController < ApplicationController
 		Dir["#{chunk_file_directory}/*.part*"].sort_by {|f| f.split(".part")[1].to_i }
 	end
 
-	def document_params
-		params.require(:document).permit(:title, :subject, :abstract)
-	end
+	
 end

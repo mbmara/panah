@@ -1,0 +1,30 @@
+<div class="box box-primary">
+    <div class="box-header text-right">
+        <button ui-sref="user.new" class="btn btn-primary btn-xs">Add New User</button>
+    </div>
+    <div class="box-body">
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Date Created</th>                
+                                        
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="a in $ctrl.users">
+                        <td>{{a.id}}</td>
+                        <td>{{a.email}}</td>
+                        <td>{{a.fullname}}</td>
+                        <td>{{a.user_type}}</td>
+                        <td>{{a.created_at | date:'MMM dd, yyyy'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

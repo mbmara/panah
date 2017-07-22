@@ -1,35 +1,28 @@
 {
-  "name": "mlmApp",
-  "description": "social online networking site",
-  "main": "index.html",
-  "authors": [
-    "tearhear18 <tearhear18@gmail.com>"
-  ],
+  "name": "panah",
+  "description": "panah-app",
+  "main": "",
   "license": "MIT",
-  "keywords": [
-    "mlm",
-    "online",
-    "network",
-    "ramel",
-    "tearhear18"
-  ],
   "homepage": "",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
+    "vendor/assets/bower_components",
     "test",
     "tests"
   ],
   "dependencies": {
-    "angular": "^1.6.5",
-    "angular-ui-router": "^1.0.5",
     "AdminLTE": "adminlte#^2.3.11",
-    "bootstrap": "^3.3.7",
     "font-awesome": "^4.7.0",
-    "jquery-slimscroll": "slimScroll#^1.3.8",
-    "jquery-ui": "*",
+    "angular-ui-router": "^1.0.5",
+    "bootstrap": "^3.3.7",
     "angular-ui-tinymce": "^0.0.19",
-    "ng-flow": "~2"
+    "jquery-ui": "*",
+    "jquery-slimscroll": "slimScroll#^1.3.8",
+    "ng-flow": "~2",
+    "ngstorage": "^0.3.10",
+    "angular-notify": "^2.5.1",
+    "angularjs-datepicker": "^2.1.17"
   }
 }
