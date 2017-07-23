@@ -1,8 +1,18 @@
 class Api::V1::PostController < ApplicationController
 	before_action :validate_session, except:[:login]
 
+	def update
+		post = @user.post.find update_params[:id]
+		
+	end
+
 	def index
-		@posts = Post.all
+		p @user.admin?
+		if @user.admin?
+			@posts = Post.all
+		else
+			@posts = @user.post.all
+		end
 		
 	end
 	def delete
@@ -10,12 +20,21 @@ class Api::V1::PostController < ApplicationController
 		json_response true,"deleted"
 	end
 	def show
-		@post = Post.find params[:id]
-		json_response true,@post
+		if @user.admin?
+			#open any post
+			@post = Post.find params[:id]
+			@attachment = @post.attachments
+		else
+			#open only user post
+			@attachment = @post.attachments
+			@post = @user.post.find params[:id]
+		   
+		end
+		json_response true,{document:@post,attachments:@attachment}
 	end
 	def create
 		ActiveRecord::Base.transaction do
-			doc = Post.new
+			doc = @user.post.new
 			doc.title 		= document_params[:title]
 			doc.subject 	= document_params[:subject]
 			doc.abstract 	= document_params[:abstract].to_s.html_safe
@@ -24,6 +43,7 @@ class Api::V1::PostController < ApplicationController
 			doc.case_number = document_params[:case_number]
 			doc.parties 	= document_params[:parties]
 			doc.tags 		= document_params[:tags]
+			doc.links 		= document_params[:links].to_json
 			doc.promulgation_date = document_params[:promulgation_date]
 			doc.decision = document_params[:decision]
 
@@ -39,7 +59,7 @@ class Api::V1::PostController < ApplicationController
 	def upload
 		status = 200
 		document_id = nil
-		
+		FileUtils.rm_rf chunk_file_directory
 		if request.get?
 			status = 204 unless File.exists?(chunk_file_path)
 		else
@@ -68,7 +88,10 @@ class Api::V1::PostController < ApplicationController
 	private
 
 	def document_params
-		params.require(:document).permit(:title, :subject, :abstract, :body, :author, :case_number, :promulgation_date, :decision,parties:[],tags:[])
+		params.require(:document).permit(:title, :subject, :abstract, :body, :author, :case_number, :promulgation_date, :decision,parties:[],tags:[],links:[:label,:link])
+	end
+	def update_params
+		params.require(:document).permit(:id,:title, :subject, :abstract, :body, :author, :case_number, :promulgation_date, :decision,parties:[],tags:[],links:[:label,:link])
 	end
 
 	def save_file!

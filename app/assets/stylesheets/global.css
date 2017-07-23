@@ -16,7 +16,7 @@ section.content{
 	padding: 0;
 }
 .tags li{
-	background: rgba(0,0,0,0.6)
+	background: rgba(0,0,0,0.6);
 	padding:5px;
 	display: inline;
 }
@@ -27,5 +27,7 @@ section.content{
 	padding: 5px;
 	border-radius: 0 10px 0 0;
 	margin-right: 5px;
+	margin-bottom:5px;
 	background: #eee;
+	cursor: pointer;
 }

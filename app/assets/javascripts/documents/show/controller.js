@@ -14,10 +14,12 @@
 			var id = $state.params.id;
 
 			DocumentFactory.show(id , function(res){
-				showdoc.document = res.data.payload;
-				showdoc.document.parties = JSON.parse(res.data.payload.parties)
-				showdoc.document.tags = JSON.parse(res.data.payload.tags)
-			})
+				showdoc.document = res.data.payload.document;
+				showdoc.document.parties = JSON.parse(res.data.payload.document.parties);
+				showdoc.document.tags = JSON.parse(res.data.payload.document.tags);
+				showdoc.document.links = JSON.parse(res.data.payload.document.links);
+				showdoc.document.attachments = res.data.payload.attachments;
+			});
 		}
 
 

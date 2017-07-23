@@ -29,37 +29,36 @@
 				<p><span style="width:118px;display: inline-block;"><b>Subject Matter:</b></span>{{showdoc.document.subject}}</p> 
 				<p><span style="width:118px;display: inline-block;"><b>Parties:</b></span>
 					{{showdoc.document.parties[0]}} &nbsp; {{showdoc.document.parties[1]}} &nbsp;{{showdoc.document.parties[2]}}</p> 
+                    <hr>
         	</div>
         </div>
+       
         <div class="row">
-            <div class="col-md-12" >
-                <h4>Tags</h4>
+            <div class="col-md-4" >
+                <h4>Attachment</h4>
+                <a target="_blank" href="uploads/file/{{a.attachment}}" class="pdf_wrapper" ng-repeat="a in showdoc.document.attachments">
+                    <i class="fa fa-file-pdf-o"></i> <span style="font-size:12px">{{a.attachment.split("_")[1]}}</span>
+                </a>
                 
+            </div>
+            <div class="col-md-3" >
+                <h4>Links</h4>
+                <ul>
+                    <li ng-repeat="a in showdoc.document.links">
+                        <a target="_blank" href="{{a.link}}">{{a.label}}</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-5" >
+                <h4>Tags</h4>
                 <ul class="tags">
                     <li style="background: #ddd;padding:5px;display: inline-block;border-radius: 10px;margin-right: 10px;" ng-repeat="a in showdoc.document.tags">{{a}}</li>
-                    
                 </ul>
-                <hr>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6" >
-                <h4>Attachment</h4>
-                
-                <div class="pdf_wrapper">
-                    <i class="fa fa-file-pdf-o"></i> <span style="font-size:12px">test</span>
-                </div>
-                
-            </div>
-            <div class="col-md-6" >
-                <h4>Links</h4>
-                <a href="http://www.facebook.com">Sample</a>
-                
             </div>
         </div>
         <div class="row">
             <div class="col-md-12" >
-                <
+                
             </div>
         </div>
     </div>

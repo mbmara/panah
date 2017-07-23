@@ -10,6 +10,8 @@ Rails.application.routes.draw do
           get 'documents', to: 'post#index'
           get 'document/:id', to: 'post#show'
           post 'document/delete/:id', to:'post#delete'
+
+          post 'post/update/:id', to: 'post#update'
         	resources :post do
       			collection do
 			        get :upload

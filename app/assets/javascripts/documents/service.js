@@ -14,7 +14,19 @@
         f.all = all;
         f.show= show;
         f.deleteDoc = deleteDoc;
+        f.edit = edit;
+        f.update = update;
 
+        function update(id,document,k){
+          Server.post('post/update/'+id,{document:document}).then(k,function(){
+            alert("Failed to save");
+          });
+        }
+        function edit(id,k){
+          Server.get('document/'+id).then( k,function(){
+            alert("Failed to view document");
+          });
+        }
         function deleteDoc(id,k){
           Server.post('document/delete/'+id).then(k,function(){
             alert("Failed to delete");

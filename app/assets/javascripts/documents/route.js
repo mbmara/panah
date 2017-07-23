@@ -26,5 +26,11 @@
             controllerAs:'showdoc',
             templateUrl:'documents/show/view.html'
         })
+        .state('document.edit',{
+            url:'/edit/:id',
+            controller:'editDocumentController',
+            controllerAs:'editdoc',
+            templateUrl:'documents/edit/view.html'
+        })
     }
 })()

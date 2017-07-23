@@ -45,8 +45,6 @@ GEM
       sprockets (>= 3.0, < 5)
       tilt
     arel (8.0.0)
-    bcrypt (3.1.11)
-    bcrypt (3.1.11-x86-mingw32)
     bindex (0.5.0)
     builder (3.2.3)
     byebug (9.0.6)
@@ -61,6 +59,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     concurrent-ruby (1.0.5)
     erubi (1.6.1)
+    execjs (2.7.0)
     ffi (1.9.18)
     ffi (1.9.18-x86-mingw32)
     globalid (0.4.0)
@@ -159,6 +158,8 @@ GEM
     tilt (2.0.7)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
+    uglifier (3.2.0)
+      execjs (>= 0.3.0, < 3)
     web-console (3.5.1)
       actionview (>= 5.0)
       activemodel (>= 5.0)
@@ -176,7 +177,6 @@ PLATFORMS
 
 DEPENDENCIES
   angular-rails-templates
-  bcrypt (~> 3.1.7)
   byebug
   capybara (~> 2.13)
   jbuilder
@@ -187,6 +187,7 @@ DEPENDENCIES
   rails (~> 5.1.2)
   sass-rails (~> 5.0)
   selenium-webdriver
+  uglifier
   web-console (>= 3.3.0)
 
 BUNDLED WITH
