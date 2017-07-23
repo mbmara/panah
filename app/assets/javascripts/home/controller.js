@@ -6,13 +6,10 @@
 		.controller("homeController",homeController);
 
 		//Dependency
-		homeController.$inject = [];
+		homeController.$inject = ['userInit'];
 
-		function homeController(){
-
-			var home = this;
-
-
+		function homeController(userInit){
+			
 		}
 
 

@@ -16,7 +16,41 @@
         f.deleteDoc = deleteDoc;
         f.edit = edit;
         f.update = update;
+        f.approve = approve;
+        f.reject = reject;
+        f.pending = pending;
+        f.rejected = rejected;
+        f.search = search;
 
+        function search(data,k){
+          Server.post('documents/search',{search:data}).then(k, function(){
+            alert("failed to search");
+          })
+        }
+        function pending(k){
+          Server.get('documents/pending').then(k,function(){
+            alert("Failed to get pending document");
+          })
+        }
+        function rejected(k){
+          Server.get('documents/rejected').then(k,function(){
+            alert("Failed to get pending document");
+          })
+        }
+        function reject(id,k){
+          Server.post('document/reject/'+id).then( k,
+            function(){
+              alert("Failed to reject document");
+            }
+          )
+        }
+        function approve(id,k){
+          Server.post('document/approve/'+id).then( k,
+            function(){
+              alert("Failed to approve document");
+            }
+          )
+        }
         function update(id,document,k){
           Server.post('post/update/'+id,{document:document}).then(k,function(){
             alert("Failed to save");

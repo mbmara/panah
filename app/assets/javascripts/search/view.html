@@ -1,0 +1,104 @@
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                <div class="box-header with-border" ng-click="searchDoc.toggle()" >
+                    <p class="pull-left"><b>Advance Search</b></p>
+                    <p class="pull-right">
+                        <i ng-if="!searchDoc.searchWindow" class="fa fa-plus"></i>
+                        <i ng-if="searchDoc.searchWindow" class="fa fa-minus"></i>
+                    </p>
+                    <div class="clearfix"></div>
+                </div>
+                <form ng-submit="searchDoc.search()">
+                <div ng-if="searchDoc.searchWindow" class="box-body">
+                    
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Search..</label>
+                                    <input type="text" class="form-control" ng-model="searchDoc.data.searchStr" placeholder="Title | Abstract | Content">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Date From</label>
+                                    <datepicker date-format="yyyy-MM-dd">
+                                      <input class="form-control pull-right" ng-model="searchDoc.data.date_from" type="text"/>
+                                    </datepicker>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Date To</label>
+                                    <datepicker date-format="yyyy-MM-dd">
+                                      <input class="form-control pull-right" ng-model="searchDoc.data.date_to" type="text"/>
+                                    </datepicker>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Author</label>
+                                    <input type="text" class="form-control" ng-model="searchDoc.data.author">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Case Number</label>
+                                    <input type="text" class="form-control" ng-model="searchDoc.data.case_number">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Decision</label>
+                                    <select ng-model="searchDoc.data.decision" class="form-control" ng-options="a.value as a.label for a in searchDoc.decisions">
+                                        <option value="" selected hidden disabled>-Select Decision-</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    
+                </div>
+                <div ng-if="searchDoc.searchWindow" class="box-footer text-right">
+                    <button type="submit" class="btn btn-success">Search</button>
+                </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-success">
+                
+                <div class="box-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                   
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Promulgation Date</th>                 
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="a in searchDoc.result">
+                                    <td><a ui-sref="document.show({id:a.id})">{{a.title}}</a></td>
+                                    <td>{{a.status}}</td>
+                                    <td>{{a.promulgation_date | date:'MMM dd, yyyy'}}</td>
+                                </tr>
+                                <tr ng-if="searchDoc.result.length==0">
+                                    <td colspan="3" class="text-center">No records found</td>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>

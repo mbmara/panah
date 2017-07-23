@@ -4,7 +4,7 @@
     .module('PANAH-APP')
     .component('panahSidenav',{
         templateUrl:'shared/sidenav/view.html',
-        //controller:'headerController'
+        controller:'sidenavController'
       }
     )
 })()

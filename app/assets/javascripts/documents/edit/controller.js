@@ -14,6 +14,29 @@
                 {value:'opinion', label:'Opinion'}
             ];
             editdoc.data = {};
+
+            editdoc.approve = function(){
+                if(editdoc.data.tags.length==0){
+                    alert("Please add tags and save changes");
+                }else{
+                    DocumentFactory.approve(id,  function(res){
+                        alert(res.data.payload);
+                        $state.go('document')
+                        
+                    });
+                }
+            }
+            editdoc.reject = function(){
+                
+                DocumentFactory.reject(id,  function(res){
+                    alert(res.data.payload);
+                    $state.go('document')
+                });
+                
+            }
+            editdoc.addtag = function(tag){
+                editdoc.data.tags.push(tag);
+            }
             editdoc.removeLink = function(index){
                 editdoc.data.links.splice(index,1);
             }

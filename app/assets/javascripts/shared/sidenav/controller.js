@@ -3,21 +3,18 @@
 
 	angular
 		.module("PANAH-APP")
-		.controller("headerController",headerController);
+		.controller("sidenavController",sidenavController);
 
 		//Dependency
-		headerController.$inject = ['UserFactory'];
+		sidenavController.$inject = ['UserFactory'];
 
 
-		function headerController(UserFactory){
+		function sidenavController(UserFactory){
                   var vm = this;
 
             	UserFactory.authenticate().then(
                         function(res){
-                              vm.name = res.data.name;
-                              vm.role = res.data.role;
-                              vm.date = res.data.date;
-                              vm.shortname = res.data.shortname;
+                              vm.isAdmin = res.data.admin;
                         },
                         function(){}
                   );

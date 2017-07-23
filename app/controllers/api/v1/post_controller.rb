@@ -1,6 +1,105 @@
 class Api::V1::PostController < ApplicationController
 	before_action :validate_session, except:[:login]
 
+	def search
+		temp_data = []
+		p "--- search start---"
+		if !search_params[:author].blank?
+			p "--- look for author since param is present---"
+			author = User.find_all_by_name_containing search_params[:author]
+
+			p author.present?
+			search_params[:searchStr] || ""
+			if author.present?
+				p "--- author found----"
+				p author.size
+				author.each do |user|
+					h = {}
+					h[:case_number] = search_params[:case_number] if search_params[:case_number].present?
+					h[:decision] = search_params[:decision] if search_params[:decision].present?
+					
+					if search_params[:date_from].present? && search_params[:date_to].present?
+						p '----- default 2 date----'
+						u = user.post.where(h).where('created_at BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day).search search_params[:searchStr]
+					elsif search_params[:date_from].present? && !search_params[:date_to].present?
+						p '----- default from----'
+						u = user.post.where(h).where('created_at > ?',search_params[:date_from]).search search_params[:searchStr]
+					elsif !search_params[:date_from].present? && search_params[:date_to].present?
+						p '----- default to----'
+						u = user.post.where(h).where('created_at < ?',search_params[:date_to]).search search_params[:searchStr]
+					else
+						p '----- default running----'
+						u = user.post.where(h).search(search_params[:searchStr])
+					end
+					p u.size
+					u.each do |tmp|
+						temp_data << tmp
+					end
+				end
+			end
+		else
+			p "--- look direct to docs since no author is present---"
+			h = {}
+			h[:case_number] = search_params[:case_number] if search_params[:case_number].present?
+			h[:decision] = search_params[:decision] if search_params[:decision].present?
+			
+			if search_params[:date_from].present? && search_params[:date_to].present?
+				p "---- both frm and to exist"
+				temp_data = Post.where(h).where('created_at BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day).search search_params[:searchStr]
+			elsif search_params[:date_from].present? && !search_params[:date_to].present?
+				temp_data = Post.where(h).where('created_at > ?',search_params[:date_from]).search search_params[:searchStr]
+				p "---- both frm exist"
+				
+			elsif !search_params[:date_from].present? && search_params[:date_to].present?
+				p "---- both to exist"
+				temp_data = Post.where(h).where('created_at < ?',search_params[:date_to]).search search_params[:searchStr]
+			else
+				p "---- no date exist---"
+				temp_data = Post.where(h).search search_params[:searchStr]
+			end
+		end
+		@results = temp_data
+	end
+
+
+	def pendingDoc
+		@posts = Post.where status: :pending	
+	end
+	def rejected
+		@posts = Post.where status: :rejected	
+	end
+
+	def approve
+		if @user.admin?
+			post = Post.find params[:id]
+			if post.present?
+				post.status = :published
+				post.save
+				json_response true, "Approval Success"
+			else
+				json_response false,"Unable to find document"
+			end
+			
+		else
+			json_response false,"Account cannot approve this document"
+		end
+	end
+	def reject
+		if @user.admin?
+			post = Post.find params[:id]
+			if post.present?
+				post.status = :rejected
+				post.save
+				json_response true, "Document Rejected"
+			else
+				json_response false,"Unable to find document"
+			end
+			
+		else
+			json_response false,"Account cannot Reject this document"
+		end
+	end
+
 	def update
 		if @user.admin?
 			post = Post.find update_params[:id]
@@ -63,9 +162,9 @@ class Api::V1::PostController < ApplicationController
 			@attachment = @post.attachments
 		else
 			#open only user post
-			@attachment = @post.attachments
 			@post = @user.post.find params[:id]
-		   
+			@attachment = @post.attachments
+
 		end
 		json_response true,{document:@post,attachments:@attachment}
 	end
@@ -82,8 +181,8 @@ class Api::V1::PostController < ApplicationController
 			doc.tags 		= document_params[:tags]
 			doc.links 		= document_params[:links].to_json
 			doc.promulgation_date = document_params[:promulgation_date]
-			doc.decision = document_params[:decision]
-
+			doc.decision 	= document_params[:decision]
+			doc.status    	= @user.admin? ? :published : :pending
 			if doc.save
 				json_response true,doc.id
 			else
@@ -124,6 +223,9 @@ class Api::V1::PostController < ApplicationController
 
 	private
 
+	def search_params
+		params.require(:search).permit(:searchStr,:date_from,:date_to,:author,:case_number,:decision)
+	end
 	def document_params
 		params.require(:document).permit(:title, :subject, :abstract, :body, :author, :case_number, :promulgation_date, :decision,parties:[],tags:[],links:[:label,:link])
 	end

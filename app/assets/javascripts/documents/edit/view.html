@@ -150,7 +150,7 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-primary" ng-click="editdoc.update();">UPDATE</button>
+                <button class="btn btn-primary" ng-click="editdoc.update();">Save Changes</button>
                 <br>
                 <br>
                 <div ng-if="editdoc.processing">
@@ -164,6 +164,10 @@
                 </div>
             </div>
         </div>
-        
+    </div>
+     <div class="box-footer" >
+        <button ng-if="editdoc.data.status!='published'" class="btn btn-success" ng-click="editdoc.approve()">Approve</button>
+        <button ng-if="editdoc.data.status!='rejected'" class="btn btn-danger" ng-click="editdoc.reject()">Reject</button>
+        <button class="btn btn-default">Re-Assign</button>
     </div>
 </div>

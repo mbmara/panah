@@ -21,7 +21,12 @@ angular.module('PANAH-APP',[
 	          	url:"/",
 	          	controller:'homeController',
 	       		templateUrl:"home/view.html",
-	       		controllerAs:'home'
+	       		controllerAs:'home',
+	       		resolve:{
+	       			userInit: ['UserFactory', function(UserFactory){
+	       				return UserFactory.authenticate();
+	       			}]
+	       		}
 	    	})
 	}
 

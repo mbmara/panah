@@ -32,5 +32,17 @@
             controllerAs:'editdoc',
             templateUrl:'documents/edit/view.html'
         })
+        .state('document.pending',{
+            url:'/pending',
+            controller:'pendingDocumentController',
+            controllerAs:'pendingDoc',
+            templateUrl:'documents/pending/view.html'
+        })
+        .state('document.rejected',{
+            url:'/rejected',
+            controller:'rejectedDocumentController',
+            controllerAs:'rejectDoc',
+            templateUrl:'documents/rejected/view.html'
+        })
     }
 })()

@@ -3,9 +3,9 @@
 
     angular.module("PANAH-APP")
         .controller("newDocumentController",newDocumentController);
-        newDocumentController.$inject=['DocumentFactory','Server','$state'];
+        newDocumentController.$inject=['DocumentFactory','Server','$state','UserFactory'];
 
-        function newDocumentController(DocumentFactory,Server, $state){
+        function newDocumentController(DocumentFactory,Server, $state,UserFactory){
             var newdoc = this;
 
             newdoc.processing = false;
@@ -17,7 +17,10 @@
                 plugins: 'link image code',
                 toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
             };
-
+            UserFactory.authenticate().then( function(res){
+                
+                newdoc.admin = res.data.admin;
+            })
             newdoc.flowdata = {};
             newdoc.data = {
                 title:"Ramel Story",

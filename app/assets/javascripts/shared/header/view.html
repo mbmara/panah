@@ -17,7 +17,7 @@
 				<li class="dropdown user user-menu">
 					<a class="dropdown-toggle" data-toggle="dropdown">
 						<div class="user-image user-tag">
-							<p>RC</p>
+							<p style="text-transform: capitalize;">{{$ctrl.shortname}}</p>
 						</div>
 
 						<span class="hidden-xs">{{$ctrl.name}}</span>
@@ -25,10 +25,10 @@
 					<ul class="dropdown-menu">
 						<!-- User image -->
 						<li class="user-header">
-							<img src="images/logo.jpg" class="img-circle" alt="User Image">
+							<img src="logo.png" class="img-circle" alt="User Image">
 							<p>
-								{{$ctrl.name}}
-								<small>Member since 2017</small>
+								{{$ctrl.role}}
+								<small>Member since {{vm.date | date:'MMM dd, yyyy'}}</small>
 							</p>
 						</li>
 						<li class="user-footer">
@@ -36,7 +36,7 @@
 							<div id="status">
 							</div>
 							<div class="pull-left">
-								<a class="btn btn-default btn-flat" ui-sref="user.profile({id:$ctrl.user_id})">Profile</a>
+								<a class="btn btn-default btn-flat" ui-sref="user.profile">Profile</a>
 							</div>
 							<div class="pull-right">
 								<a  ng-click="$ctrl.logout()" class="btn btn-default btn-flat">Sign out</a>

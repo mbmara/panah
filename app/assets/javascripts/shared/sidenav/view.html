@@ -10,6 +10,14 @@
             </a>
         </li>
         <li>
+            <a ui-sref="search">
+                <i class="fa fa-search"></i> <span>Advance Search</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+        </li>
+        <li>
             <a ui-sref="document">
                 <i class="fa fa-file"></i> <span>Documents</span>
                 <span class="pull-right-container">
@@ -17,19 +25,17 @@
                 </span>
             </a>
             <ul class="treeview-menu">
-                <li>
-                    <a ui-sref="index.users"><i class="fa fa-circle-o"></i> Advanced Search</a>
+                
+                <li ng-if="$ctrl.isAdmin">
+                    <a ui-sref="document.pending"><i class="fa fa-circle-o"></i> For Review</a>
                 </li>
-                <li>
-                    <a ui-sref="index.users"><i class="fa fa-circle-o"></i> For Review</a>
-                </li>
-                <li>
-                    <a ui-sref="index.roles"><i class="fa fa-circle-o"></i> Rejected</a>
+                <li ng-if="$ctrl.isAdmin">
+                    <a ui-sref="document.rejected"><i class="fa fa-circle-o"></i> Rejected</a>
                 </li>
 
             </ul>
         </li>
-        <li>
+        <li ng-if="$ctrl.isAdmin">
             <a ui-sref="user">
                 <i class="fa fa-user"></i> <span>User</span>
                 <span class="pull-right-container">

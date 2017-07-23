@@ -1,7 +1,6 @@
 <div class="box box-success">
     <div class="box-header with-border">
-        <p class="pull-left"><b>Documents</b></p>
-        <button ui-sref="document.new" class="btn btn-primary btn-xs pull-right">Add New Document</button>
+        <p class="pull-left"><b>Pending Documents</b></p>
         <div class="clearfix"></div>
     </div>
     <div class="box-body">
@@ -17,7 +16,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr ng-repeat="a in $ctrl.documents">
+                    <tr ng-repeat="a in pendingDoc.documents">
                         <td>{{a.author}}</td>
                         <td>{{a.title}}</td>
                         <td style="text-transform: capitalize;">{{a.status}}</td>
