@@ -2,7 +2,44 @@ class Api::V1::PostController < ApplicationController
 	before_action :validate_session, except:[:login]
 
 	def update
-		post = @user.post.find update_params[:id]
+		if @user.admin?
+			post = Post.find update_params[:id]
+		else
+			post = @user.post.find update_params[:id]
+		end
+		if post.present?
+			ActiveRecord::Base.transaction do
+				post.title 			= update_params[:title]
+				post.subject 		= update_params[:subject]
+				post.abstract 		= update_params[:abstract].to_s.html_safe
+				post.body 			= update_params[:body].to_s.html_safe
+				post.author 		= update_params[:author]
+				post.case_number 	= update_params[:case_number]
+				post.parties 		= update_params[:parties]
+				post.tags 			= update_params[:tags]
+				post.links 			= update_params[:links].to_json
+				post.promulgation_date = update_params[:promulgation_date]
+				post.decision 		= update_params[:decision]
+
+				attachment_arr = [];
+
+				update_params[:attachments].each do |b|
+					attachment_arr << b[:id]
+				end
+				
+				post.attachments.each do |x|
+					x.delete unless attachment_arr.include? x[:id] 
+				end
+
+				if post.save
+					json_response true,post.id
+				else
+					json_response false,doc.errors
+				end
+			end
+		else
+			json_response false,"failed"
+		end
 		
 	end
 
@@ -91,7 +128,7 @@ class Api::V1::PostController < ApplicationController
 		params.require(:document).permit(:title, :subject, :abstract, :body, :author, :case_number, :promulgation_date, :decision,parties:[],tags:[],links:[:label,:link])
 	end
 	def update_params
-		params.require(:document).permit(:id,:title, :subject, :abstract, :body, :author, :case_number, :promulgation_date, :decision,parties:[],tags:[],links:[:label,:link])
+		params.require(:document).permit(:id,:title, :subject, :abstract, :body, :author, :case_number, :promulgation_date, :decision,attachments:[:id],parties:[],tags:[],links:[:label,:link])
 	end
 
 	def save_file!

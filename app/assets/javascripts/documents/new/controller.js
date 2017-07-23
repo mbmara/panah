@@ -63,7 +63,6 @@
             }
             newdoc.file_content=[];
             newdoc.progress = function(file  , flow){
-                //console.log(flow.files[0]._prevUploadedSize);
                 getProgress(flow.files);
             }
             newdoc.addtag = function(tag){

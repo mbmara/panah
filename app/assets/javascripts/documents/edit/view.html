@@ -113,9 +113,13 @@
                         <input type="file" multiple="multiple" style="visibility: hidden; position:absolute;"></span>
                     </div>
                 </div>
-                <a href="/uploads/file/{{c.attachment}}" target="_blank" class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="c in editdoc.data.attachments">
+                <a target="_blank" class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="c in editdoc.data.attachments">
                     <span class="badge bg-red" ng-click="editdoc.removeFile($index)">remove</span>
                     <i class="fa fa-file-pdf-o"></i>{{c.attachment}}
+                </a>
+                <a target="_blank" class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="c in editdoc.file_content">
+                    <span class="badge bg-red" ng-click="editdoc.removeFlowFile($index)">remove</span>
+                    <i class="fa fa-file-pdf-o"></i>{{c.name}}
                 </a>
             </div>
             <div class="col-md-5">
@@ -134,7 +138,7 @@
                     </div>
                 </form>
                 <div ng-repeat="a in editdoc.data.links">
-                    <a href="{{a.link}}" target="_blank" class="btn btn-app" style="margin:5px 10px 0 0" >
+                    <a class="btn btn-app" style="margin:5px 10px 0 0" >
                         <span class="badge bg-red" ng-click="editdoc.removeLink($index)">remove</span>
                         <i class="fa fa-link"></i>{{a.label}}
                     </a>
@@ -146,7 +150,7 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <button class="btn btn-primary" ng-click="editdoc.submit();">SUBMIT</button>
+                <button class="btn btn-primary" ng-click="editdoc.update();">UPDATE</button>
                 <br>
                 <br>
                 <div ng-if="editdoc.processing">
