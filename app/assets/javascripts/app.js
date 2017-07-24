@@ -10,8 +10,12 @@ angular.module('PANAH-APP',[
     'cgNotify',
     '720kb.datepicker',
 ])
-	.config(['$stateProvider','$urlRouterProvider','$locationProvider', router]);
-
+	.config(['$stateProvider','$urlRouterProvider','$locationProvider', router])
+	.filter('htmlToPlaintext', function() {
+    	return function(text) {
+      		return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+    	};
+  	});
 	function router($stateProvider, $urlRouterProvider, $locationProvider){
 		$locationProvider.html5Mode(false).hashPrefix('');
     	$urlRouterProvider.otherwise('/');

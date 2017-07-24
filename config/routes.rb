@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   	namespace :api do
         namespace :v1 do
@@ -20,6 +22,7 @@ Rails.application.routes.draw do
 
           post 'post/update/:id', to: 'post#update'
 
+          get 'information', to: 'home#index'
         	resources :post do
       			collection do
 			        get :upload

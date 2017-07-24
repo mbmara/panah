@@ -20,13 +20,13 @@ class Api::V1::PostController < ApplicationController
 					
 					if search_params[:date_from].present? && search_params[:date_to].present?
 						p '----- default 2 date----'
-						u = user.post.where(h).where('created_at BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day).search search_params[:searchStr]
+						u = user.post.where(h).where('promulgation_date BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day).search search_params[:searchStr]
 					elsif search_params[:date_from].present? && !search_params[:date_to].present?
 						p '----- default from----'
-						u = user.post.where(h).where('created_at > ?',search_params[:date_from]).search search_params[:searchStr]
+						u = user.post.where(h).where('promulgation_date > ?',search_params[:date_from]).search search_params[:searchStr]
 					elsif !search_params[:date_from].present? && search_params[:date_to].present?
 						p '----- default to----'
-						u = user.post.where(h).where('created_at < ?',search_params[:date_to]).search search_params[:searchStr]
+						u = user.post.where(h).where('promulgation_date < ?',search_params[:date_to]).search search_params[:searchStr]
 					else
 						p '----- default running----'
 						u = user.post.where(h).search(search_params[:searchStr])
@@ -45,14 +45,14 @@ class Api::V1::PostController < ApplicationController
 			
 			if search_params[:date_from].present? && search_params[:date_to].present?
 				p "---- both frm and to exist"
-				temp_data = Post.where(h).where('created_at BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day).search search_params[:searchStr]
+				temp_data = Post.where(h).where('promulgation_date BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day).search search_params[:searchStr]
 			elsif search_params[:date_from].present? && !search_params[:date_to].present?
-				temp_data = Post.where(h).where('created_at > ?',search_params[:date_from]).search search_params[:searchStr]
+				temp_data = Post.where(h).where('promulgation_date > ?',search_params[:date_from]).search search_params[:searchStr]
 				p "---- both frm exist"
 				
 			elsif !search_params[:date_from].present? && search_params[:date_to].present?
 				p "---- both to exist"
-				temp_data = Post.where(h).where('created_at < ?',search_params[:date_to]).search search_params[:searchStr]
+				temp_data = Post.where(h).where('promulgation_date < ?',search_params[:date_to]).search search_params[:searchStr]
 			else
 				p "---- no date exist---"
 				temp_data = Post.where(h).search search_params[:searchStr]

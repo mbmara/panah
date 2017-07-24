@@ -25,6 +25,9 @@
         f.token = function(){
           return $localStorage.uuid;
         }
+        f.error = function(){
+          alert("Server connection failed.. Please try again!");
+        }
         return f;
       }
 })();

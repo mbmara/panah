@@ -20,6 +20,7 @@
 
         	function create( user ){
         		UserFactory.create(newuser.data, function(res){
+                    console.log(res);
         			if(res.data.status){
                         $state.go('user')
         			}else{
