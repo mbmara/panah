@@ -5,7 +5,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       	t.string :title
       	t.text :body
         t.text :abstract
-      	t.string :tags
+      	t.text :tags
       	t.integer :status
       	t.datetime :reviewed_at
       	t.string :author
@@ -13,7 +13,7 @@ class CreatePosts < ActiveRecord::Migration[5.1]
       	t.string :case_number
       	t.string :document_type
         t.string :decision
-        t.string :links
+        t.text :links
         t.string :subject
         t.string :parties
       	t.timestamps

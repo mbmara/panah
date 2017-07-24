@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
 	has_many :attachments
 	belongs_to :user
-	validates_presence_of  :title, :subject, :abstract, :body, :author, :case_number, :parties, :promulgation_date, :decision
+	#validates_presence_of  :title, :subject, :abstract, :body, :author, :case_number, :parties, :promulgation_date, :decision
 	
 	enum status: [:draft, :pending, :rejected, :published]
 
