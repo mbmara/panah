@@ -1,30 +1,152 @@
 
 <section class="content">
-    <div class="row">
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
+  <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
 
-            <div class="info-box-content">
-              <span class="info-box-text">Users</span>
-              <span class="info-box-number">2</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
+        <div class="info-box-content">
+          <span class="info-box-text">Users</span>
+          <span class="info-box-number">2</span>
         </div>
-        <div class="col-md-3 col-sm-6 col-xs-12">
-          <div class="info-box">
-            <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
-
-            <div class="info-box-content">
-              <span class="info-box-text">Documents</span>
-              <span class="info-box-number">15</span>
-            </div>
-            <!-- /.info-box-content -->
-          </div>
-          <!-- /.info-box -->
-        </div>
-
+      </div>
     </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Documents</span>
+          <span class="info-box-number">15</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Pending Document</span>
+          <span class="info-box-number">15</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Latest Document</span>
+          <span class="info-box-number">15</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="row">
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">My Document</span>
+          <span class="info-box-number">2</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">All Documents</span>
+          <span class="info-box-number">15</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">My Pending Document</span>
+          <span class="info-box-number">15</span>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+      <div class="info-box">
+        <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
+
+        <div class="info-box-content">
+          <span class="info-box-text">Latest Document</span>
+          <span class="info-box-number">15</span>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-default" style="min-height: 500px;">
+        <div class="boxbody">
+          <div class="row">
+            <div class="searchForm">
+              <div class="col-md-12">
+                <form>
+                  <div class = "input-group">
+                   <input type = "text" class = "form-control">
+                   <span class = "input-group-btn">
+                      <button class = "btn btn-default" type = "button">
+                         Go!
+                      </button>
+                   </span>
+                  </div>
+                </form>
+              </div>
+            </div>
+            
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-sm-12" ng-repeat="a in [1,2,3,4]">
+                <h4><a href="">Sample Title</a></h4>
+                <p style="color:green">
+                  Abstract somethign words cut by rails asdasdh ajdjkd hasdhasj hjh asdhkasjdh jkasdhjkas dhaj hdasdas d. 
+                  <br>
+                  <small style="color:#777">Author: Ramel Cabug-os</small> <small style="color:#777">Promulgation Date: Ramel Cabug-os</small>
+                </p>
+                
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-sm-12">
+                
+                <hr>
+                <p><b>Opinion</b></p>
+                <a class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="a in [1,2,3,4,5,6,7]">
+                    <i class="fa fa-calendar"></i><span ng-click="newdoc.removeTag($index)" class="badge bg-green">100</span>
+                    2017
+                </a> 
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="col-sm-12">
+               
+                <hr>
+                <p><b>Decision</b></p>
+                <a class="btn btn-app" style="margin:5px 10px 0 0">
+                    <i class="fa fa-calendar"></i><span ng-click="newdoc.removeTag($index)" class="badge bg-green">100</span>
+                    2017
+                </a> 
+              </div>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>

@@ -15,12 +15,16 @@ class Post < ApplicationRecord
 	def self.search(str)
 		p str.blank?
 		if !str.blank?
+			value = Array.new
 			search_length = str.split.length
-			where [(['title like ? OR abstract like ? OR body like ?'] * search_length).join(' AND ')] + str.split.map { |name| "%#{name}%"} + str.split.map { |name| "%#{name}%"} + str.split.map { |name| "%#{name}%"}
+			str.split.each do |c|
+				value.push("%#{c}%","%#{c}%")
+			end
+			where [(['title like ? OR abstract like ?'] * search_length).join(' AND ')] + 	value
 		else
 			where("id > 0")
 		end
-
+# 
 
 	end
 

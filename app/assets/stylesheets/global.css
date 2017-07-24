@@ -31,3 +31,8 @@ section.content{
 	background: #eee;
 	cursor: pointer;
 }
+.searchForm{
+	width: 500px;
+	margin: auto;
+	padding: 20px;	
+}
