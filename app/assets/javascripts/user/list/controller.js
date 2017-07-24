@@ -10,6 +10,7 @@
         	var vm = this;
         	vm.users = [];
 
+
         	UserFactory.all( function(res){
         		vm.users = res.data;
         	});

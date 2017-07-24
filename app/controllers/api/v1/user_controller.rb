@@ -1,9 +1,50 @@
 class Api::V1::UserController < ApplicationController
 	before_action :validate_session, except:[:login]
+	before_action :require_admin, only:[]
 	def index
 		@users = User.all
 	end
+
+	def update
+		_user = User.find update_params[:id]
+
+
+		if _user.present?
+			if @user.admin? || @user.user_type_id == _user.user_type_id
+				_user.fname = update_params[:fname]
+				_user.lname = update_params[:lname]
+				_user.mname = update_params[:mname]
+				_user.user_type_id = update_params[:user_type]
+
+				if update_params[:password].present?
+					_user.password = to_md5 update_params[:password]
+				end
+				if _user.save
+					json_response true,"Account updated"
+				else
+					json_response false,_user.errors
+				end
+			else
+				json_response false,"Permission Denied"
+			end
+		end
+		
+	end
+
 	def authenticate
+	end
+
+	def profile	
+		
+		if params[:id].present? && params[:id].to_i > 0
+			if @user.admin?
+				@profile = User.find params[:id]
+			else
+				json_response false,"Invalid permission"
+			end
+		else
+			@profile = @user
+		end
 	end
 
 	def login
@@ -56,6 +97,9 @@ class Api::V1::UserController < ApplicationController
 
 	private 
 
+	def update_params
+		params.require(:user).permit(:id,:fname,:lname,:mname,:email,:password,:user_type)
+	end
 	def user_params
 		params.require(:user).permit(:fname,:lname,:mname,:email,:password,:password2,:user_type,:office);
 	end

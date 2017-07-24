@@ -16,8 +16,13 @@
 
         	function login(user){
         		UserFactory.login(user, function(res){
-        			Server.setToken(res.data.payload);
-        			location.reload();
+                    if(res.data.status){
+                        Server.setToken(res.data.payload);
+                        location.reload();      
+                    }else{
+                        alert(res.data.payload);
+                    } 
+        			
         		})
         	}
             

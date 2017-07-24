@@ -6,40 +6,76 @@
         <!-- Profile Image -->
         <div class="box box-success">
             <div class="box-body box-profile">
-                <img class="profile-user-img img-responsive img-circle" src="./images/logo.jpg" alt="User profile picture">
+                <img class="profile-user-img img-responsive" style="border:none" src="./logo.png" alt="User profile picture">
 
-                <h3 class="profile-username text-center">Nina Mcintire</h3>
+                <h3 class="profile-username text-center">{{profile.data.name}}</h3>
 
-                <p class="text-muted text-center">Software Engineer</p>
+                <p class="text-muted text-center">{{profile.data.type}}</p>
 
                 <ul class="list-group list-group-unbordered">
                     <li class="list-group-item">
-                        <b>Followers</b> <a class="pull-right">1,322</a>
+                        <b>Documents</b> <a class="pull-right">{{profile.data.total_docs}}</a>
                     </li>
                     <li class="list-group-item">
-                        <b>Following</b> <a class="pull-right">543</a>
-                    </li>
-                    <li class="list-group-item">
-                        <b>Friends</b> <a class="pull-right">13,287</a>
+                        <b>Rejected</b> <a class="pull-right">{{profile.data.rejected}}</a>
                     </li>
                 </ul>
 
-                <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+                <!-- <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a> -->
             </div>
             <!-- /.box-body -->
         </div>
-        <!-- /.box -->
-
-
     </div>
     <!-- /.col -->
     <div class="col-md-9">
         <div class="box box-success">
     
-            <div class="box-header"><b>New Document</b></div>
-                <div class="box-body">
-                dta
+            <div class="box-header"><b>Profile</b></div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>First Name</label>
+                            <input type="text" class="form-control" ng-model="profile.data.fname">
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input type="text" class="form-control" ng-model="profile.data.lname">
+                        </div>
+                    </div>
+                     <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Middle Name</label>
+                            <input type="text" class="form-control" ng-model="profile.data.mname">
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>User Type</label>
+                            <select class="form-control" ng-model="profile.data.user_type" ng-options="a.id as a.name for a in profile.data.user_types">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Email Address</label>
+                             <input type="email" class="form-control" ng-model="profile.data.email" disabled>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Change Password</label>
+                            <input type="password" class="form-control" placeholder="* * * * *" ng-model="profile.data.password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button class="btn btn-primary" ng-click="profile.update()">Update Account</button>
             </div>
         </div>
     </div>

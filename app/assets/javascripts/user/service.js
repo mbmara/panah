@@ -17,7 +17,16 @@
         f.login = login;
         f.name = null;
         f.logout = logout;
+        f.profile = profile;
+        f.updateProfile = updateProfile;
 
+        function updateProfile(profile, k ){
+          Server.post('user/update',{user:profile}).then(k,Server.error);
+        }
+        function profile(id,k){
+          Server.get('user/profile/'+id).then(k,Server.error);
+        }
+        
         function logout(){
           Server.setToken(0);
           location.reload();

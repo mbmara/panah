@@ -16,7 +16,7 @@
             controllerAs:'newuser'
         })
         .state('user.profile',{
-            url:'/profile',
+            url:'/profile/:id',
             templateUrl:'user/profile/view.html',
             controller:'userProfileController',
             controllerAs:'profile'

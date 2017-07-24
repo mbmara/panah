@@ -41,6 +41,12 @@ class ApplicationController < ActionController::Base
         return false
       end
     end
+    def require_admin
+      if !@user.admin? 
+        json_response false,"Permission Denied"
+        return false
+      end
+    end
   	def angular
     	render 'layouts/application'
   	end

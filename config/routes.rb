@@ -9,7 +9,8 @@ Rails.application.routes.draw do
           get 'users', to: 'user#index'
           post 'user/login', to: 'user#login'
           post 'user/authenticate', to: 'user#authenticate'
-          
+          get 'user/profile/:id', to: 'user#profile'
+          post 'user/update', to: 'user#update'
           get 'documents', to: 'post#index'
           get 'document/:id', to: 'post#show'
           post 'document/delete/:id', to:'post#delete'

@@ -11,6 +11,9 @@ class Post < ApplicationRecord
   			where("title like :search OR abstract like :search", search: "%#{search}%")
   		end
 	end
+	def rejected
+		where status: :rejected	
+	end
 
 	def self.search(str)
 		p str.blank?
