@@ -22,11 +22,8 @@ namespace :etl do
   			_m.decision	= z[:document_type]
   			_m.links	= z[:links]
   			_m.subject	= z[:subject]
-  				temp = z[:parties]
-  				tmp =  temp[6..-1]
-  				final_name =  tmp[0..-12]
-  			_m.parties	= final_name
-  			p z[:tags]
+  			temp = z[:parties].split("\n")[1]
+  			_m.parties	= temp[2..-1]
   			if _m.save
   				p "---ok--"
   			else
