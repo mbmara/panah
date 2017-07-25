@@ -31,5 +31,15 @@
                 </tbody>
             </table>
         </div>
+        <div class="text-center">
+            <div paging
+              page="1"
+              page-size="10"
+              total="$ctrl.total"
+              show-prev-next="true"
+              show-first-last="true"
+              paging-action="$ctrl.load_page( page )">
+            </div>
+        </div>
     </div>
 </div>

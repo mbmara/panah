@@ -1,4 +1,4 @@
-json.array! @posts do |v|
-	json.extract! v, :id,:title,:promulgation_date, :status, :author
-	
+json.results @results do |v|
+	json.extract! v, :title, :id, :status, :promulgation_date, :abstract, :author
 end
+json.total @total

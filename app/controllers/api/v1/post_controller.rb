@@ -43,15 +43,19 @@ class Api::V1::PostController < ApplicationController
 	end
 
 	def pendingDoc
-		@posts = Post.where status: :pending	
+		if @user.admin? || @user.is_allowed?
+			@posts = Post.where status: :pending
+		end	
 	end
 
 	def rejected
-		@posts = Post.where status: :rejected	
+		if @user.admin? || @user.is_allowed?
+			@posts = Post.where status: :rejected	
+		end
 	end
 
 	def approve
-		if @user.admin?
+		if @user.admin? || @user.is_allowed?
 			post = Post.find params[:id]
 			if post.present?
 				post.status = :published
@@ -66,7 +70,7 @@ class Api::V1::PostController < ApplicationController
 		end
 	end
 	def reject
-		if @user.admin?
+		if @user.admin? || @user.is_allowed?
 			post = Post.find params[:id]
 			if post.present?
 				post.status = :rejected
@@ -82,7 +86,7 @@ class Api::V1::PostController < ApplicationController
 	end
 
 	def update
-		if @user.admin?
+		if @user.admin? || @user.is_allowed?
 			post = Post.find update_params[:id]
 		else
 			post = @user.post.find update_params[:id]
@@ -124,20 +128,21 @@ class Api::V1::PostController < ApplicationController
 	end
 
 	def index
-		p @user.admin?
-		if @user.admin?
-			@posts = Post.all
+		if @user.admin? || @user.is_allowed?
+			_sdata = Post.all
+			p _sdata.size
 		else
-			@posts = @user.post.all
+			_sdata = @user.post.all
 		end
-		
+		@total = _sdata.size
+		@results = @total < 10 ? _sdata : _sdata.page(params[:page]).per(10)
 	end
 	def delete
 		Post.delete params[:id]
 		json_response true,"deleted"
 	end
 	def show
-		if @user.admin?
+		if @user.admin? || @user.is_allowed?
 			#open any post
 			@post = Post.find params[:id]
 			@attachment = @post.attachments

@@ -8,7 +8,7 @@
 UserType.create([
 	{name: "User"},
 	{name: "Encoder"},
-	{name: "Editor"},
+	{name: "Author"},
 	{name: "Admin"}
 ])
 User.create({

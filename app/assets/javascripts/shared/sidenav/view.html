@@ -17,7 +17,8 @@
                 </span>
             </a>
         </li>
-        <li>
+
+        <li ng-if="$ctrl.isAdmin || $ctrl.permission==2 || $ctrl.permission==3">
             <a ui-sref="document">
                 <i class="fa fa-file"></i> <span>Documents</span>
                 <span class="pull-right-container">
@@ -26,10 +27,10 @@
             </a>
             <ul class="treeview-menu">
                 
-                <li ng-if="$ctrl.isAdmin">
+                <li ng-if="$ctrl.isAdmin || $ctrl.permission==3">
                     <a ui-sref="document.pending"><i class="fa fa-circle-o"></i> For Review</a>
                 </li>
-                <li ng-if="$ctrl.isAdmin">
+                <li ng-if="$ctrl.isAdmin || $ctrl.permission==3">
                     <a ui-sref="document.rejected"><i class="fa fa-circle-o"></i> Rejected</a>
                 </li>
 

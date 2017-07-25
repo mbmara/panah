@@ -18,8 +18,12 @@
                 toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
             };
             UserFactory.authenticate().then( function(res){
-                
                 newdoc.admin = res.data.admin;
+
+                if(res.data.permission==1){
+                    $state.go("main");
+                    console.log(res);
+                }
             })
             newdoc.flowdata = {};
             newdoc.data = {

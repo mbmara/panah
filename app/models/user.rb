@@ -15,6 +15,9 @@ class User < ApplicationRecord
 	def admin?
 		(user_type_id==4)
 	end
+	def is_allowed?
+		(user_type_id==3)
+	end
 	def self.find_all_by_name_containing(search)
 		# _names = search.split(" ")
   # 		where("fname like :search OR lname like :search", search: "%#{_names[0]}%")

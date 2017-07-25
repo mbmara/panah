@@ -34,12 +34,12 @@
           Server.post('documents/search',{search:data}).then(k,Server.error)
         }
         function pending(k){
-          Server.get('documents/pending').then(k,function(){
+          Server.get('pending').then(k,function(){
             alert("Failed to get pending document");
           })
         }
         function rejected(k){
-          Server.get('documents/rejected').then(k,function(){
+          Server.get('rejected').then(k,function(){
             alert("Failed to get pending document");
           })
         }
@@ -77,15 +77,11 @@
             alert("Failed to view document");
           });
         }
-        function all(k){
-          Server.get("documents").then( k, function(res){
-            console.log(res);
-          });
+        function all(page,k){
+          Server.get("documents/"+page).then( k,Server.error);
         }
         function create(file,k){
-          Server.post('post',{document:file}).then(k,function(){
-            alert("Failed to save");
-          });
+          Server.post('post',{document:file}).then(k,Server.error);
         }
 
         return f;

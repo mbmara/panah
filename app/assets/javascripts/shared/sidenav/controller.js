@@ -15,6 +15,7 @@
             	UserFactory.authenticate().then(
                         function(res){
                               vm.isAdmin = res.data.admin;
+                              vm.permission = res.data.permission;
                         },
                         function(){}
                   );
