@@ -1,8 +1,16 @@
 class Post < ApplicationRecord
+	include SearchCop
+
 	has_many :attachments
 	belongs_to :user
 	#validates_presence_of  :title, :subject, :abstract, :body, :author, :case_number, :parties, :promulgation_date, :decision
-	
+	search_scope :search do
+	    attributes :abstract, :title, :case_number, :author, :body
+	end
+
+	search_scope :by_year do
+		attributes :promulgation_date
+	end
 	enum status: [:draft, :pending, :rejected, :published]
 
 	def self.find_matches(search)
@@ -15,20 +23,5 @@ class Post < ApplicationRecord
 		where status: :rejected	
 	end
 
-	def self.search(str)
-		p str.blank?
-		if !str.blank?
-			value = Array.new
-			search_length = str.split.length
-			str.split.each do |c|
-				value.push("%#{c}%","%#{c}%")
-			end
-			where [(['title like ? OR abstract like ?'] * search_length).join(' AND ')] + 	value
-		else
-			where("id > 0")
-		end
-# 
-
-	end
 
 end

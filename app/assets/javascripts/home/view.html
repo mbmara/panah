@@ -93,7 +93,7 @@
               <div class="col-md-12">
                 <form ng-submit="home.goSearch(home.s)">
                   <div class = "input-group">
-                   <input type = "text" class = "form-control" ng-model="home.s.searchStr">
+                   <input type = "text" class = "form-control" ng-model="home.s.searchStr" placeholder="Any thing....">
                    <span class = "input-group-btn">
                       <button class = "btn btn-default" type = "submit">
                          Go!
@@ -111,10 +111,19 @@
                 <h4><a ui-sref="document.show({id:a.id})">{{a.title}}</a></h4>
                 <p >
                   <div style="color:green" ng-bind-html="a.abstract | htmlToPlaintext | limitTo: 300 | sanitize_html"></div>
-                 
-                  <small style="color:#777">Author: {{a.author}}</small> <small style="color:#777">Promulgation Date: {{a.promulgation_date}}</small>
+                  <small style="color:#777">Author:<b> {{a.author}}</b></small> <small style="color:#777">Promulgation Date: <b>{{a.promulgation_date}}</b></small>
                 </p>
                 
+              </div>
+              <div class="col-sm-12 text-center">
+                <div paging
+                  page="1"
+                  page-size="10"
+                  total="home.total"
+                  show-prev-next="true"
+                  show-first-last="true"
+                  paging-action="home.load_page( page )">
+                </div>
               </div>
             </div>
           </div>
@@ -124,7 +133,7 @@
                 
                 <hr>
                 <p><b>Opinion</b></p>
-                <a class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="(a,b) in home.data.opinion_year ">
+                <a ng-click="home.loadByYear(a,'opinion')" class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="(a,b) in home.data.opinion_year ">
                     <i class="fa fa-calendar"></i><span ng-click="newdoc.removeTag($index)" class="badge bg-green">{{b}}</span>
                     {{a}}
                 </a> 
@@ -137,8 +146,8 @@
                
                 <hr>
                 <p><b>Decision</b></p>
-                <a class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="(a,b) in home.data.decision_year">
-                    <i class="fa fa-calendar"></i><span ng-click="newdoc.removeTag($index)" class="badge bg-green">{{b}}</span>
+                <a ng-click="home.loadByYear(a,'decision')" class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="(a,b) in home.data.decision_year">
+                    <i class="fa fa-calendar"></i><span class="badge bg-green">{{b}}</span>
                     {{a}}
                 </a> 
               </div>

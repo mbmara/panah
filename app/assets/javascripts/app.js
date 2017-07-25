@@ -9,6 +9,7 @@ angular.module('PANAH-APP',[
 	'ngStorage',
     'cgNotify',
     '720kb.datepicker',
+    'bw.paging'
 ])
 	.config(['$stateProvider','$urlRouterProvider','$locationProvider', router])
 	.filter('htmlToPlaintext', function() {

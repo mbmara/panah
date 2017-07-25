@@ -21,11 +21,17 @@
         f.pending = pending;
         f.rejected = rejected;
         f.search = search;
+        f.home_search = home_search;
+        f.byYear  = byYear;
 
+        function byYear(obj,k){
+          Server.post('documents/by_year',{year:obj}).then(k,Server.error);
+        }
+        function home_search(data,k){
+          Server.post('documents/homeSearch',{search:data}).then(k,Server.error);
+        }
         function search(data,k){
-          Server.post('documents/search',{search:data}).then(k, function(){
-            alert("failed to search");
-          })
+          Server.post('documents/search',{search:data}).then(k,Server.error)
         }
         function pending(k){
           Server.get('documents/pending').then(k,function(){

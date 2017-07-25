@@ -20,6 +20,8 @@ Rails.application.routes.draw do
           get 'documents/pending', to: 'post#pendingDoc'
           get 'documents/rejected', to: 'post#rejected'
           post 'documents/search', to: 'post#search'
+          post 'documents/homeSearch', to: 'post#homeSearch'
+          post 'documents/by_year', to: 'post#by_year'
 
           post 'post/update/:id', to: 'post#update'
 

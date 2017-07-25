@@ -11,4 +11,5 @@
 //= require ngstorage
 //= require angular-notify
 //= require angularjs-datepicker
+//= require angular-paging
 //= require_tree .

@@ -23,6 +23,7 @@
     "ng-flow": "~2",
     "ngstorage": "^0.3.10",
     "angular-notify": "^2.5.1",
-    "angularjs-datepicker": "^2.1.17"
+    "angularjs-datepicker": "^2.1.17",
+    "angular-paging": "^2.2.2"
   }
 }

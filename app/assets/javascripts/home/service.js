@@ -11,7 +11,7 @@
         var f={};
 
         f.init = init;
-
+        
         function init(k){
           Server.get('information').then(k, Server.error);
         }

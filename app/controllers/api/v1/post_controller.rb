@@ -1,70 +1,51 @@
 class Api::V1::PostController < ApplicationController
 	before_action :validate_session, except:[:login]
 
-	def search
-		temp_data = []
-		p "--- search start---"
-		if !search_params[:author].blank?
-			p "--- look for author since param is present---"
-			author = User.find_all_by_name_containing search_params[:author]
-
-			p author.present?
-			search_params[:searchStr] || ""
-			if author.present?
-				p "--- author found----"
-				p author.size
-				author.each do |user|
-					h = {}
-					h[:case_number] = search_params[:case_number] if search_params[:case_number].present?
-					h[:decision] = search_params[:decision] if search_params[:decision].present?
-					
-					if search_params[:date_from].present? && search_params[:date_to].present?
-						p '----- default 2 date----'
-						u = user.post.where(h).where('promulgation_date BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day).search search_params[:searchStr]
-					elsif search_params[:date_from].present? && !search_params[:date_to].present?
-						p '----- default from----'
-						u = user.post.where(h).where('promulgation_date > ?',search_params[:date_from]).search search_params[:searchStr]
-					elsif !search_params[:date_from].present? && search_params[:date_to].present?
-						p '----- default to----'
-						u = user.post.where(h).where('promulgation_date < ?',search_params[:date_to]).search search_params[:searchStr]
-					else
-						p '----- default running----'
-						u = user.post.where(h).search(search_params[:searchStr])
-					end
-					p u.size
-					u.each do |tmp|
-						temp_data << tmp
-					end
-				end
-			end
-		else
-			p "--- look direct to docs since no author is present---"
-			h = {}
-			h[:case_number] = search_params[:case_number] if search_params[:case_number].present?
-			h[:decision] = search_params[:decision] if search_params[:decision].present?
-			
-			if search_params[:date_from].present? && search_params[:date_to].present?
-				p "---- both frm and to exist"
-				temp_data = Post.where(h).where('promulgation_date BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day).search search_params[:searchStr]
-			elsif search_params[:date_from].present? && !search_params[:date_to].present?
-				temp_data = Post.where(h).where('promulgation_date > ?',search_params[:date_from]).search search_params[:searchStr]
-				p "---- both frm exist"
-				
-			elsif !search_params[:date_from].present? && search_params[:date_to].present?
-				p "---- both to exist"
-				temp_data = Post.where(h).where('promulgation_date < ?',search_params[:date_to]).search search_params[:searchStr]
-			else
-				p "---- no date exist---"
-				temp_data = Post.where(h).search search_params[:searchStr]
-			end
-		end
-		@results = temp_data
+	def homeSearch
+		_sdata = Post.search( search_params[:searchStr] )
+		@total = _sdata.size
+		@results = @total < 10 ? _sdata : _sdata.page(search_params[:page]).per(10)
 	end
 
+	def by_year
+		_sdata = Post.where('decision = ?',load_params[:doc_type]).by_year("promulgation_date:#{load_params[:year]}")
+		@total = _sdata.size
+		@results = @total < 10 ? _sdata : _sdata.page(load_params[:page]).per(10)
+	end
+
+	def search
+		h = {}
+		if search_params[:pos] == 1
+			h[:decision] = search_params[:decision] if search_params[:decision].present?
+			if search_params[:date_from].present? && search_params[:date_to].present?
+				_sdata = Post.where(h).search({case_number: search_params[:case_number], author: search_params[:author],abstract:search_params[:searchStr]}).where('promulgation_date BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day)
+			elsif search_params[:date_from].present? && !search_params[:date_to].present?
+				_sdata = Post.where(h).search({case_number: search_params[:case_number], author: search_params[:author],abstract:search_params[:searchStr]}).where('promulgation_date > ?',search_params[:date_from])
+			elsif !search_params[:date_from].present? && search_params[:date_to].present?
+				_sdata = Post.where(h).search({case_number: search_params[:case_number], author: search_params[:author],abstract:search_params[:searchStr]}).where('promulgation_date < ?',search_params[:date_to])
+			else
+				_sdata = Post.where(h).search({case_number: search_params[:case_number], author: search_params[:author],abstract:search_params[:searchStr]})
+			end
+		else
+			h[:decision] = search_params[:decision] if search_params[:decision].present?
+			if search_params[:date_from].present? && search_params[:date_to].present?
+				_sdata = Post.where(h).search({case_number: search_params[:case_number], author: search_params[:author],body:search_params[:searchStr]}).where('promulgation_date BETWEEN ? AND ?',Date.parse(search_params[:date_from]).beginning_of_day,Date.parse(search_params[:date_to]).end_of_day)
+			elsif search_params[:date_from].present? && !search_params[:date_to].present?
+				_sdata = Post.where(h).search({case_number: search_params[:case_number], author: search_params[:author],body:search_params[:searchStr]}).where('promulgation_date > ?',search_params[:date_from])
+			elsif !search_params[:date_from].present? && search_params[:date_to].present?
+				_sdata = Post.where(h).search({case_number: search_params[:case_number], author: search_params[:author],body:search_params[:searchStr]}).where('promulgation_date < ?',search_params[:date_to])
+			else
+				_sdata = Post.where(h).search({case_number: search_params[:case_number], author: search_params[:author],body:search_params[:searchStr]})
+			end
+		end
+		@total = _sdata.size
+		@results = @total < 10 ? _sdata : _sdata.page(search_params[:page]).per(10)
+	end
 
 	def pendingDoc
 		@posts = Post.where status: :pending	
 	end
+
 	def rejected
 		@posts = Post.where status: :rejected	
 	end
@@ -223,8 +204,11 @@ class Api::V1::PostController < ApplicationController
 
 	private
 
+	def load_params
+		params.require(:year).permit(:year,:doc_type,:page)
+	end
 	def search_params
-		params.require(:search).permit(:searchStr,:date_from,:date_to,:author,:case_number,:decision)
+		params.require(:search).permit(:searchStr,:date_from,:date_to,:author,:case_number,:decision, :page, :pos)
 	end
 	def document_params
 		params.require(:document).permit(:title, :subject, :abstract, :body, :author, :case_number, :promulgation_date, :decision,parties:[],tags:[],links:[:label,:link])
