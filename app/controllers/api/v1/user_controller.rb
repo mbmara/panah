@@ -53,8 +53,11 @@ class Api::V1::UserController < ApplicationController
 			if user.password === to_md5(login_params[:password])
       			_payload = {:id =>user.id,:exp=>expiration_time}
       			_token = generate_secure_session _payload
+
+      			user.audits.create({purpose: login_params[:purpose], status: true})
       			json_response true,{token:_token}
 			else
+				user.audits.create({purpose: login_params[:purpose], status: false})
 				json_response false,"Invalid Account"
 			end
 		else
@@ -105,6 +108,6 @@ class Api::V1::UserController < ApplicationController
 	end
 
 	def login_params
-		params.require(:user).permit(:email, :password)
+		params.require(:user).permit(:email, :password, :purpose)
 	end
 end

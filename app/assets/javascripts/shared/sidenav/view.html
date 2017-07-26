@@ -50,6 +50,20 @@
 
             </ul>
         </li>
+        <li ng-if="$ctrl.isAdmin">
+            <a ui-sref="audit">
+                <i class="fa fa-shield"></i> <span>Audit</span>
+                <span class="pull-right-container">
+                    <i class="fa fa-angle-left pull-right"></i>
+                </span>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a ui-sref="audit.login"><i class="fa fa-circle-o"></i> Login Log</a>
+                </li>
+
+            </ul>
+        </li>
     </ul>
   </section>
 </aside>

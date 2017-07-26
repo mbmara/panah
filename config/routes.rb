@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
           post 'post/update/:id', to: 'post#update'
 
+          get 'loginAudit', to: 'audit#login'
           get 'information', to: 'home#index'
         	resources :post do
       			collection do

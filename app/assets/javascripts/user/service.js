@@ -19,7 +19,11 @@
         f.logout = logout;
         f.profile = profile;
         f.updateProfile = updateProfile;
+        f.loginAudit = loginAudit;
 
+        function loginAudit(k){
+          Server.get('loginAudit').then(k,Server.error);
+        }
         function updateProfile(profile, k ){
           Server.post('user/update',{user:profile}).then(k,Server.error);
         }

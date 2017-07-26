@@ -1,0 +1,27 @@
+<div class="box box-success">
+	<div class="box-header with-border">Login Log</div>
+	<div class="box-body">
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Name</th>
+						<th>Purpose</th>
+						<th>Status</th>
+						<th>Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-class="{danger:a.status}" ng-repeat="a in loginAudit.results">
+						<td>{{a.id}}</td>
+						<td>{{a.name}}</td>
+						<td>{{a.purpose}}</td>
+						<td>{{a.status}}</td>
+						<td>{{a.created_at | date:'MM dd, yyyy'}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>	
+</div>
