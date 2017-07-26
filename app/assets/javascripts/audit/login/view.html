@@ -13,7 +13,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-class="{danger:a.status}" ng-repeat="a in loginAudit.results">
+					<tr ng-class="{danger:!a.status}" ng-repeat="a in loginAudit.results">
 						<td>{{a.id}}</td>
 						<td>{{a.name}}</td>
 						<td>{{a.purpose}}</td>
