@@ -105,13 +105,13 @@
             </div>
             
           </div>
-          <div class="row">
+          <div class="row" ng-if="home.search">
             <div class="col-md-12">
               <div class="col-sm-12" ng-repeat="a in home.data.results">
                 <h4><a ui-sref="document.show({id:a.id})">{{a.title}}</a></h4>
                 <p >
                   <div style="color:green" ng-bind-html="a.abstract | htmlToPlaintext | limitTo: 300 | sanitize_html"></div>
-                  <small style="color:#777">Author:<b> {{a.author}}</b></small> <small style="color:#777">Promulgation Date: <b>{{a.promulgation_date}}</b></small>
+                  <small style="color:#777">Author:<b> {{a.author}}</b></small> <small style="color:#777">Promulgation Date: <b>{{a.promulgation_date | date:'MMM dd, yyyy'}}</b></small>
                 </p>
                 
               </div>
@@ -123,6 +123,28 @@
                   show-prev-next="true"
                   show-first-last="true"
                   paging-action="home.load_page( page )">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row" ng-if="!home.search">
+            <div class="col-md-6">
+              <div class="col-sm-12" ng-repeat="left in home.data.left" ng-if="left.data.length>0">
+                <h4>{{left.month}}</h4>
+                <div class="list-group">
+                  <a ui-sref="document.show({id:ldata.id})" class="list-group-item" ng-repeat="ldata in left.data">
+                    <b>{{ldata.case_number}}</b> <small>author: {{ldata.author}} / ( {{ldata.promulgation_date | date:'MMM dd, yyyy'}})</small>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="col-sm-12" ng-repeat="right in home.data.right"  ng-if="right.data.length>0">
+                <h4>{{right.month}}</h4>
+                <div class="list-group">
+                  <a ui-sref="document.show({id:rdata.id})" class="list-group-item" ng-repeat="rdata in right.data">
+                    <b>{{rdata.case_number}}</b> <small>author: {{rdata.author}} / {{rdata.promulgation_date | date:'MMM dd, yyyy'}}</small>
+                  </a>
                 </div>
               </div>
             </div>

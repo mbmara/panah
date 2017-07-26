@@ -8,9 +8,37 @@ class Api::V1::PostController < ApplicationController
 	end
 
 	def by_year
-		_sdata = Post.where('decision = ?',load_params[:doc_type]).by_year("promulgation_date:#{load_params[:year]}")
-		@total = _sdata.size
-		@results = @total < 10 ? _sdata : _sdata.page(load_params[:page]).per(10)
+		_sdata = Post.select(:id,:title,:case_number,:author,:promulgation_date).where('decision = ?',load_params[:doc_type]).by_year("promulgation_date:#{load_params[:year]}").order("extract(month from promulgation_date) ASC")
+		
+		temp={}
+
+		temp[:left] = [
+			{month:'January',data:[]},
+			{month:'February',data:[]},
+			{month:'March',data:[]},
+			{month:'April',data:[]},
+			{month:'May',data:[]},
+			{month:'June',data:[]}
+			]
+		temp[:right] = [
+			{month:'July',data:[]},
+			{month:'August',data:[]},
+			{month:'September',data:[]},
+			{month:'October',data:[]},
+			{month:'November',data:[]},
+			{month:'December',data:[]}
+		]
+		
+		_sdata.each do |d|
+			tmp = d.promulgation_date.split("-")[1].to_i
+			p "----#{tmp}"
+			if  tmp < 7
+				temp[:left][tmp-1][:data] << d
+			else
+				temp[:right][tmp-7][:data] << d
+			end
+		end
+		json_response true,temp
 	end
 
 	def search

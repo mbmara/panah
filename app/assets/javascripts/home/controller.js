@@ -9,7 +9,9 @@
 		homeController.$inject = ['userInit','HomeFactory','DocumentFactory'];
 
 		function homeController(userInit, HomeFactory,DocumentFactory){
-			var home = this,search = true;
+			var home = this;
+
+			home.search = true;
 			home.s={
 				page:1
 			}
@@ -17,19 +19,19 @@
 					page:1
 				}
 			home.loadByYear = function(year,doc_type){
-				search = false;
+				home.search = false;
 				obj.year = year;
 				obj.doc_type = doc_type;
 				DocumentFactory.byYear(obj, function(res){
-					home.data.results = res.data.results;
-					home.total = res.data.total;
+					home.data.left = res.data.payload.left;
+					home.data.right = res.data.payload.right;
 				})
 			}
 			HomeFactory.init( function(res){
 				home.data = res.data.payload;
 			});
 			home.load_page = function(p){
-				if(search){
+				if(home.search){
 					home.s.page = p;
 					home.goSearch(home.s);	
 				}else{
@@ -38,7 +40,7 @@
 				}
 			}
 			home.goSearch = function(searchStr){
-				search = true;
+				home.search = true;
 				DocumentFactory.home_search(searchStr, function(res){
 					home.data.results = res.data.results;
 					home.total = res.data.total;
