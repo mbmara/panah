@@ -10,7 +10,7 @@
 
 		function homeController(userInit, HomeFactory,DocumentFactory, $state){
 			var home = this;
-
+			DocumentFactory.destroy_adv_search();
 			home.search = true;
 			home.s={
 				page:1,

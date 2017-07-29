@@ -25,7 +25,17 @@
         f.byYear  = byYear;
         f.getTagMatches = getTagMatches;
         f.destroy_cache = destroy_cache;
+        f.destroy_home_search = destroy_home_search;
+        f.destroy_adv_search = destroy_adv_search;
 
+        function destroy_home_search(){
+          delete f.cache;
+          delete f.cache_search;
+        }
+        function destroy_adv_search(){
+          delete f.search_cache2;
+          delete f.search_cache_data;
+        }
         function destroy_cache(){
           delete f.cache;
           delete f.cache_search;

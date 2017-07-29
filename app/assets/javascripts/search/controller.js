@@ -16,7 +16,7 @@
            	  page:1,
               pos:1
            	}
-            
+            DocumentFactory.destroy_home_search();
            	searchDoc.decisions = [
                 {value:'decision', label:'Decision'},
                 {value:'opinion', label:'Opinion'}
