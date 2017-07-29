@@ -5,7 +5,7 @@ class Api::V1::PostController < ApplicationController
 		if search_params[:pos] == 1
 			_sdata = Post.search( search_params[:searchStr] )
 		else
-			_sdata = Post.search({body:search_params[:searchStr]})
+			_sdata = Post.search_custom({body:search_params[:searchStr]})
 		end
 		@total = _sdata.size
 		@results = @total < 10 ? _sdata : _sdata.page(search_params[:page]).per(10)

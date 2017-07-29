@@ -11,6 +11,10 @@ class Post < ApplicationRecord
 	search_scope :by_year do
 		attributes :promulgation_date
 	end
+
+	search_scope :search_custom do
+		attributes :title, :author
+	end
 	enum status: [:draft, :pending, :rejected, :published]
 
 	def self.find_matches(search)
