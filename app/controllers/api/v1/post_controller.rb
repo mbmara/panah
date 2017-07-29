@@ -1,6 +1,13 @@
 class Api::V1::PostController < ApplicationController
 	before_action :validate_session, except:[:login]
 
+
+	def listFilter
+		_sdata = Post.where({status:list_params[:status]}).where("title like ?","%#{list_params[:title]}%")
+		@total = _sdata.size
+		@results = @total < 10 ? _sdata : _sdata.page(params[:page]).per(10)
+	end
+
 	def getTagMatch
 		@results = Post.search_custom params[:tag]
 	end
@@ -174,9 +181,11 @@ class Api::V1::PostController < ApplicationController
 		@results = @total < 10 ? _sdata : _sdata.page(params[:page]).per(10)
 	end
 	def delete
-		if @user.admin? || @user.is_allowed?
+		if @user.admin?
 			Post.delete params[:id]
 			json_response true,"deleted"
+		else
+			json_response false,"Access Denied"
 		end
 	end
 	def show
@@ -246,6 +255,10 @@ class Api::V1::PostController < ApplicationController
 	end
 
 	private
+
+	def list_params
+		params.require(:search).permit(:title,:status)	
+	end
 
 	def load_params
 		params.require(:year).permit(:year,:doc_type,:page)

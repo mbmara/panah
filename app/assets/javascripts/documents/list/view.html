@@ -5,6 +5,18 @@
         <div class="clearfix"></div>
     </div>
     <div class="box-body">
+        <form class="form-inline" ng-submit="$ctrl.search()">
+            <div class="form-group">
+                <input type="text" ng-model="$ctrl.temp.title" class="form-control" id="exampleInputName2" placeholder="Title">
+            </div>
+            <div class="form-group">
+                <select class="form-control" ng-model="$ctrl.temp.status" ng-options="a as a for a in $ctrl.statuses">
+                    <option value="" disabled selected hidden>-Select Status-</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-default">Search</button>
+        </form>
+        <hr>
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
                 <thead>

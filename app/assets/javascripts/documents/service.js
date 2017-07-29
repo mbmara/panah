@@ -27,7 +27,11 @@
         f.destroy_cache = destroy_cache;
         f.destroy_home_search = destroy_home_search;
         f.destroy_adv_search = destroy_adv_search;
+        f.listFilter = listFilter;
 
+        function listFilter(data,k){
+          Server.post('listFilter',{search:data}).then(k,Server.error)
+        }
         function destroy_home_search(){
           delete f.cache;
           delete f.cache_search;

@@ -26,7 +26,8 @@ Rails.application.routes.draw do
           post 'post/update/:id', to: 'post#update'
           #getMatchestag
           get 'getTagMatch/:tag', to: 'post#getTagMatch'
-
+          post 'listFilter', to: 'post#listFilter'
+          
           get 'loginAudit', to: 'audit#login'
           get 'information', to: 'home#index'
         	resources :post do
