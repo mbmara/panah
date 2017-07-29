@@ -9,6 +9,12 @@
             url:'/login',
             templateUrl:'login/view.html'
         })
+        .state('main.tag',{
+            url:'tag/:tag',
+            controllerAs:'docTag',
+            controller:'tagDocController',
+            templateUrl:'home/tags/view.html'
+        })
         
     }
 })()

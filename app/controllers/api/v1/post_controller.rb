@@ -1,6 +1,10 @@
 class Api::V1::PostController < ApplicationController
 	before_action :validate_session, except:[:login]
 
+	def getTagMatch
+		@results = Post.search_custom params[:tag]
+	end
+
 	def homeSearch
 		if search_params[:pos] == 1
 			_sdata = Post.search_custom( search_params[:searchStr] )
@@ -170,8 +174,10 @@ class Api::V1::PostController < ApplicationController
 		@results = @total < 10 ? _sdata : _sdata.page(params[:page]).per(10)
 	end
 	def delete
-		Post.delete params[:id]
-		json_response true,"deleted"
+		if @user.admin? || @user.is_allowed?
+			Post.delete params[:id]
+			json_response true,"deleted"
+		end
 	end
 	def show
 		if @user.admin? || @user.is_allowed?

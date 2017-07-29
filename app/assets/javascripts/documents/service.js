@@ -23,7 +23,11 @@
         f.search = search;
         f.home_search = home_search;
         f.byYear  = byYear;
+        f.getTagMatches = getTagMatches;
 
+        function getTagMatches(tag,k){
+          Server.get('getTagMatch/'+tag).then(k,Server.error);
+        }
         function byYear(obj,k){
           Server.post('documents/by_year',{year:obj}).then(k,Server.error);
         }

@@ -13,7 +13,7 @@ class Post < ApplicationRecord
 	end
 	#search custom
 	search_scope :search_custom do
-		attributes :title, :author, :abstract
+		attributes :title, :author, :abstract, :tags
 	end
 	enum status: [:draft, :pending, :rejected, :published]
 

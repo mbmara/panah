@@ -42,179 +42,185 @@
       </div>
     </div>
   </div>
-  <div class="row" ng-if="!home.data.admin">
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
+  <div ui-view>
+    <div class="row" ng-if="!home.data.admin">
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
 
-        <div class="info-box-content">
-          <span class="info-box-text">My Document</span>
-          <span class="info-box-number">{{home.data.user}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">All Documents</span>
-          <span class="info-box-number">{{home.data.total_docs}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">My Pending Document</span>
-          <span class="info-box-number">{{home.data.pending_docs}}</span>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-3 col-sm-6 col-xs-12">
-      <div class="info-box">
-        <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
-
-        <div class="info-box-content">
-          <span class="info-box-text">Latest Document</span>
-          <span class="info-box-number">{{home.data.latest_docs}}</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-12">
-      <div class="box box-default" style="min-height: 500px;">
-        <div class="boxbody">
-          <div class="row">
-            <div class="searchForm">
-              <div class="col-md-12">
-                <form ng-submit="home.goSearch(home.s)">
-                  <div class = "input-group">
-                   <input type = "text" class = "form-control" ng-model="home.s.searchStr" placeholder="Any thing....">
-                   <span class = "input-group-btn">
-                      <button class = "btn btn-default" type = "submit">
-                         Go!
-                      </button>
-                   </span>
-                  </div>
-                </form>
-              </div>
-            </div>
-            
+          <div class="info-box-content">
+            <span class="info-box-text">My Document</span>
+            <span class="info-box-number">{{home.data.user}}</span>
           </div>
-          <div class="row" ng-if="home.search">
-            <div class="col-md-12">
-            <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs" >
-                    <li ng-class="home.s.pos==1 ? 'active':''">
-                        <a ng-click="home.tab(1)">Result by Title/ Abstract</a>
-                    </li>
-                    <li ng-class="home.s.pos==2 ? 'active':''">
-                        <a ng-click="home.tab(2)">Result by content</a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                   
-                                    <th>Title</th>
-                                    <th>Status</th>
-                                    <th>Promulgation Date</th>                 
-                                   
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr ng-repeat="a in home.data.results"">
-                                    <td><a ui-sref="document.show({id:a.id})">{{a.title}}</a></td>
-                                    <td>{{a.status}}</td>
-                                    <td>{{a.promulgation_date | date:'MMM dd, yyyy'}}</td>
-                                </tr>
-                                <tr ng-if="searchDoc.result.length==0">
-                                    <td colspan="3" class="text-center">No records found</td>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="col-sm-12 text-center">
-                      <div paging
-                        page="1"
-                        page-size="10"
-                        total="home.total"
-                        show-prev-next="true"
-                        show-first-last="true"
-                        paging-action="home.load_page( page )">
-                      </div>
-                    </div>
-                </div>
-            </div>
-           
         </div>
-            <!-- <div class="col-md-12">
-              <div class="col-sm-12" ng-repeat="a in home.data.results">
-                <h4><a ui-sref="document.show({id:a.id})">{{a.title}}</a></h4>
-                <p >
-                  <div style="color:green" ng-bind-html="a.abstract | htmlToPlaintext | limitTo: 300 | sanitize_html"></div>
-                  <small style="color:#777">Author:<b> {{a.author}}</b></small> <small style="color:#777">Promulgation Date: <b>{{a.promulgation_date | date:'MMM dd, yyyy'}}</b></small>
-                </p>
-                
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">All Documents</span>
+            <span class="info-box-number">{{home.data.total_docs}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">My Pending Document</span>
+            <span class="info-box-number">{{home.data.pending_docs}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-green"><i class="fa fa-file"></i></span>
+
+          <div class="info-box-content">
+            <span class="info-box-text">Latest Document</span>
+            <span class="info-box-number">{{home.data.latest_docs}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="box box-default" style="min-height: 500px;">
+          <div class="boxbody">
+            <div class="row">
+              <div class="searchForm">
+                <div class="col-md-12">
+                  <form ng-submit="home.goSearch(home.s)">
+                    <div class = "input-group">
+                     <input type = "text" class = "form-control" ng-model="home.s.searchStr" placeholder="Any thing....">
+                     <span class = "input-group-btn">
+                        <button class = "btn btn-default" type = "submit">
+                           Go!
+                        </button>
+                     </span>
+                    </div>
+                  </form>
+                </div>
               </div>
               
-            </div> -->
-
-          </div>
-          <div class="row" ng-if="!home.search">
-            <div class="col-md-6">
-              <div class="col-sm-12" ng-repeat="left in home.data.left" ng-if="left.data.length>0">
-                <h4>{{left.month}}</h4>
-                <div class="list-group">
-                  <a ui-sref="document.show({id:ldata.id})" class="list-group-item" ng-repeat="ldata in left.data">
-                    <b>{{ldata.case_number}}</b> <small>author: {{ldata.author}} / ( {{ldata.promulgation_date | date:'MMM dd, yyyy'}})</small>
-                  </a>
-                </div>
-              </div>
             </div>
-            <div class="col-md-6">
-              <div class="col-sm-12" ng-repeat="right in home.data.right"  ng-if="right.data.length>0">
-                <h4>{{right.month}}</h4>
-                <div class="list-group">
-                  <a ui-sref="document.show({id:rdata.id})" class="list-group-item" ng-repeat="rdata in right.data">
-                    <b>{{rdata.case_number}}</b> <small>author: {{rdata.author}} / {{rdata.promulgation_date | date:'MMM dd, yyyy'}}</small>
-                  </a>
-                </div>
+            <div class="row" ng-if="home.search">
+              <div class="col-md-12">
+              <div class="nav-tabs-custom">
+                  <ul class="nav nav-tabs" >
+                      <li ng-class="home.s.pos==1 ? 'active':''">
+                          <a ng-click="home.tab(1)">Result by Title/ Abstract</a>
+                      </li>
+                      <li ng-class="home.s.pos==2 ? 'active':''">
+                          <a ng-click="home.tab(2)">Result by content</a>
+                      </li>
+                  </ul>
+                  <div class="tab-content">
+                      <div class="table-responsive">
+                          <table class="table table-bordered table-striped">
+                              <thead>
+                                  <tr>
+                                     
+                                      <th>Title</th>
+                                      <th>Tags</th>
+                                      <th>Status</th>
+                                      <th>Promulgation Date</th>                 
+                                     
+                                  </tr>
+                              </thead>
+                              <tbody>
+                                  <tr ng-repeat="a in home.data.results"">
+                                      <td><a ui-sref="document.show({id:a.id})">{{a.title}}</a></td>
+                                      <td>
+                                        <a ui-sref="main.tag({tag:kl})" ng-repeat="kl in a.tags" style="padding: 0 5px;margin-right:5px;background: #ccc">{{kl}}</a>
+                                      </td>
+                                      <td>{{a.status}}</td>
+                                      <td>{{a.promulgation_date | date:'MMM dd, yyyy'}}</td>
+                                  </tr>
+                                  <tr ng-if="searchDoc.result.length==0">
+                                      <td colspan="3" class="text-center">No records found</td>
+                              </tbody>
+                          </table>
+                      </div>
+                      <div class="col-sm-12 text-center">
+                        <div paging
+                          page="1"
+                          page-size="10"
+                          total="home.total"
+                          show-prev-next="true"
+                          show-first-last="true"
+                          paging-action="home.load_page( page )">
+                        </div>
+                      </div>
+                  </div>
               </div>
-            </div>
+             
           </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="col-sm-12">
+              <!-- <div class="col-md-12">
+                <div class="col-sm-12" ng-repeat="a in home.data.results">
+                  <h4><a ui-sref="document.show({id:a.id})">{{a.title}}</a></h4>
+                  <p >
+                    <div style="color:green" ng-bind-html="a.abstract | htmlToPlaintext | limitTo: 300 | sanitize_html"></div>
+                    <small style="color:#777">Author:<b> {{a.author}}</b></small> <small style="color:#777">Promulgation Date: <b>{{a.promulgation_date | date:'MMM dd, yyyy'}}</b></small>
+                  </p>
+                  
+                </div>
                 
-                <hr>
-                <p><b>Opinion</b></p>
-                <a ng-click="home.loadByYear(a,'opinion')" class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="(a,b) in home.data.opinion_year ">
-                    <i class="fa fa-calendar"></i><span ng-click="newdoc.removeTag($index)" class="badge bg-green">{{b}}</span>
-                    {{a}}
-                </a> 
+              </div> -->
+
+            </div>
+            <div class="row" ng-if="!home.search">
+              <div class="col-md-6">
+                <div class="col-sm-12" ng-repeat="left in home.data.left" ng-if="left.data.length>0">
+                  <h4>{{left.month}}</h4>
+                  <div class="list-group">
+                    <a ui-sref="document.show({id:ldata.id})" class="list-group-item" ng-repeat="ldata in left.data">
+                      <b>{{ldata.case_number}}</b> <small>author: {{ldata.author}} / ( {{ldata.promulgation_date | date:'MMM dd, yyyy'}})</small>
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="col-sm-12" ng-repeat="right in home.data.right"  ng-if="right.data.length>0">
+                  <h4>{{right.month}}</h4>
+                  <div class="list-group">
+                    <a ui-sref="document.show({id:rdata.id})" class="list-group-item" ng-repeat="rdata in right.data">
+                      <b>{{rdata.case_number}}</b> <small>author: {{rdata.author}} / {{rdata.promulgation_date | date:'MMM dd, yyyy'}}</small>
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="col-sm-12">
-               
-                <hr>
-                <p><b>Decision</b></p>
-                <a ng-click="home.loadByYear(a,'decision')" class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="(a,b) in home.data.decision_year">
-                    <i class="fa fa-calendar"></i><span class="badge bg-green">{{b}}</span>
-                    {{a}}
-                </a> 
+            <div class="row">
+              <div class="col-md-12">
+                <div class="col-sm-12">
+                  
+                  <hr>
+                  <p><b>Opinion</b></p>
+                  <a ng-click="home.loadByYear(a,'opinion')" class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="(a,b) in home.data.opinion_year ">
+                      <i class="fa fa-calendar"></i><span ng-click="newdoc.removeTag($index)" class="badge bg-green">{{b}}</span>
+                      {{a}}
+                  </a> 
+                </div>
               </div>
             </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="col-sm-12">
+                 
+                  <hr>
+                  <p><b>Decision</b></p>
+                  <a ng-click="home.loadByYear(a,'decision')" class="btn btn-app" style="margin:5px 10px 0 0" ng-repeat="(a,b) in home.data.decision_year">
+                      <i class="fa fa-calendar"></i><span class="badge bg-green">{{b}}</span>
+                      {{a}}
+                  </a> 
+                </div>
+              </div>
+            </div>
+            <br>
           </div>
-          <br>
         </div>
       </div>
     </div>

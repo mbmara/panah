@@ -1,6 +1,10 @@
 <div class="box box-success">
     
-    <div class="box-header"><b>{{showdoc.document.title}} Document</b></div>
+    <div class="box-header">
+        <b class="pull-left">{{showdoc.document.title}} Document</b>
+        <button class="btn btn-success btn-xs pull-right" ng-click="showdoc.goback()"><i class="fa fa-arrow-left"></i> Back</button>
+        <div class="clearfix"></div>
+    </div>
     <div class="box-body">
         <div class="row">
         	<div class="col-md-12">

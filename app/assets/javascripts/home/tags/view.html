@@ -1,0 +1,25 @@
+<div class="box box-success">
+	<div class="box-header with-border">
+   <b class="pull-left">TAGS</b>
+   <button class="btn btn-success btn-xs pull-right" ng-click="docTag.goBack()"><i class="fa fa-arrow-left"></i> Back</button> 
+   <div class="clearfix"></div>
+  </div>
+	<div class="box-body">
+		<table class="table table-condensed table-striped">
+			<tr>
+      	<th>Title</th>
+      	<th>Tags</th>
+      	<th>Status</th>
+      	<th>Promulgation Date</th>                 
+    	</tr>
+    	<tr ng-repeat="a in docTag.results">
+    		<td>{{a.title}}</td>
+    		<td>
+          <a ng-repeat="kl in a.tags" style="padding: 0 5px;margin-right:5px;background: #ccc">{{kl}}</a>
+        </td>
+    		<td>{{a.status}}</td>
+    		<td>{{a.promulgation_date | date:'MMM dd, yyyy'}}</td>
+    	</tr>
+		</table>
+	</div>
+</div>
