@@ -21,7 +21,11 @@
                 {value:'decision', label:'Decision'},
                 {value:'opinion', label:'Opinion'}
             ];
-
+            if(DocumentFactory.search_cache2){
+              searchDoc.result = DocumentFactory.search_cache2.results;
+              searchDoc.total = DocumentFactory.search_cache2.total;
+              searchDoc.data = DocumentFactory.search_cache_data;
+            }
             searchDoc.tab = function(id){
               searchDoc.data.pos = id;
               searchDoc.search();
@@ -37,6 +41,8 @@
             }
             searchDoc.search = function(){
             	DocumentFactory.search(searchDoc.data, function(res){
+                DocumentFactory.search_cache2 = res.data;
+                DocumentFactory.search_cache_data = searchDoc.data;
             		searchDoc.result = res.data.results;	
                 searchDoc.total  = res.data.total;
             	})
