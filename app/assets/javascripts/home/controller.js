@@ -13,11 +13,17 @@
 
 			home.search = true;
 			home.s={
-				page:1
+				page:1,
+				pos:1
 			}
 			var obj = {
 					page:1
 				}
+
+			home.tab = function(tb){
+				home.s.pos = tb;
+				home.goSearch(home.s);	
+			}
 			home.loadByYear = function(year,doc_type){
 				home.search = false;
 				obj.year = year;

@@ -107,6 +107,53 @@
           </div>
           <div class="row" ng-if="home.search">
             <div class="col-md-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs" >
+                    <li ng-class="home.s.pos==1 ? 'active':''">
+                        <a ng-click="home.tab(1)">Result by Title/ Abstract</a>
+                    </li>
+                    <li ng-class="home.s.pos==2 ? 'active':''">
+                        <a ng-click="home.tab(2)">Result by content</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                   
+                                    <th>Title</th>
+                                    <th>Status</th>
+                                    <th>Promulgation Date</th>                 
+                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="a in home.data.results"">
+                                    <td><a ui-sref="document.show({id:a.id})">{{a.title}}</a></td>
+                                    <td>{{a.status}}</td>
+                                    <td>{{a.promulgation_date | date:'MMM dd, yyyy'}}</td>
+                                </tr>
+                                <tr ng-if="searchDoc.result.length==0">
+                                    <td colspan="3" class="text-center">No records found</td>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="col-sm-12 text-center">
+                      <div paging
+                        page="1"
+                        page-size="10"
+                        total="home.total"
+                        show-prev-next="true"
+                        show-first-last="true"
+                        paging-action="home.load_page( page )">
+                      </div>
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+            <!-- <div class="col-md-12">
               <div class="col-sm-12" ng-repeat="a in home.data.results">
                 <h4><a ui-sref="document.show({id:a.id})">{{a.title}}</a></h4>
                 <p >
@@ -115,17 +162,9 @@
                 </p>
                 
               </div>
-              <div class="col-sm-12 text-center">
-                <div paging
-                  page="1"
-                  page-size="10"
-                  total="home.total"
-                  show-prev-next="true"
-                  show-first-last="true"
-                  paging-action="home.load_page( page )">
-                </div>
-              </div>
-            </div>
+              
+            </div> -->
+
           </div>
           <div class="row" ng-if="!home.search">
             <div class="col-md-6">

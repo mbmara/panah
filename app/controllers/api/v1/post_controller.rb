@@ -2,7 +2,11 @@ class Api::V1::PostController < ApplicationController
 	before_action :validate_session, except:[:login]
 
 	def homeSearch
-		_sdata = Post.search( search_params[:searchStr] )
+		if search_params[:pos] == 1
+			_sdata = Post.search( search_params[:searchStr] )
+		else
+			_sdata = Post.search({body:search_params[:searchStr]})
+		end
 		@total = _sdata.size
 		@results = @total < 10 ? _sdata : _sdata.page(search_params[:page]).per(10)
 	end
