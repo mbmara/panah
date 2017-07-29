@@ -6,11 +6,11 @@
 		.controller("homeController",homeController);
 
 		//Dependency
-		homeController.$inject = ['userInit','HomeFactory','DocumentFactory'];
+		homeController.$inject = ['userInit','HomeFactory','DocumentFactory','$state'];
 
-		function homeController(userInit, HomeFactory,DocumentFactory){
+		function homeController(userInit, HomeFactory,DocumentFactory, $state){
 			var home = this;
-
+			
 			home.search = true;
 			home.s={
 				page:1,
