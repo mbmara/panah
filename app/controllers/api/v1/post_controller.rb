@@ -3,10 +3,10 @@ class Api::V1::PostController < ApplicationController
 
 
 	def listFilter
-		if list_params[:status].present? 
-			_sdata = Post.where({status:list_params[:status]}).where("title like ?","%#{list_params[:title]}%")
-		else
+		if list_params[:status].blank? || list_params[:status] == "all"
 			_sdata = Post.where("title like ?","%#{list_params[:title]}%")
+		else
+			_sdata = Post.where({status:list_params[:status]}).where("title like ?","%#{list_params[:title]}%")
 		end
 		@total = _sdata.size
 		@results = @total < 10 ? _sdata : _sdata.page(params[:page]).per(10)

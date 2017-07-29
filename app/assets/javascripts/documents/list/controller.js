@@ -11,7 +11,7 @@
             var page = 1;
             vm.documents = [];
 
-            vm.statuses = ["draft", "pending","rejected","published"]
+            vm.statuses = ["all","draft", "pending","rejected","published"]
 
 
             DocumentFactory.destroy_cache();
