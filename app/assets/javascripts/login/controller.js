@@ -8,10 +8,10 @@
 
         function loginController( UserFactory, Server){
         	var vm = this;
-        	vm.data = {
-        		email:'tearhear18@gmail.com',
-        		password:'123123'
-        	};
+        	// vm.data = {
+        	// 	email:'tearhear18@gmail.com',
+        	// 	password:'123123'
+        	// };
         	vm.login = login;
 
         	function login(user){

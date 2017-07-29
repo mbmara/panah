@@ -27,19 +27,19 @@
                 }
             })
             newdoc.flowdata = {};
-            newdoc.data = {
-                title:"Ramel Story",
-                subject:"Subject ofo Ramel",
-                abstract:"<p> <b>test </b>abstract </p>",
-                body:"<p> <b>test </b>body </p>",
-                author:'Author',
-                case_number:'Case Number',
-                parties:["party1","party2","Party3"],
-                promulgation_date:"2017-07-15",
-                decision:'opinion',
-                tags:[],
-                links:[]
-            }
+            // newdoc.data = {
+            //     title:"Ramel Story",
+            //     subject:"Subject ofo Ramel",
+            //     abstract:"<p> <b>test </b>abstract </p>",
+            //     body:"<p> <b>test </b>body </p>",
+            //     author:'Author',
+            //     case_number:'Case Number',
+            //     parties:["party1","party2","Party3"],
+            //     promulgation_date:"2017-07-15",
+            //     decision:'opinion',
+            //     tags:[],
+            //     links:[]
+            // }
             newdoc.removeLink = function(index){
                 newdoc.data.links.splice(index,1);
             }
