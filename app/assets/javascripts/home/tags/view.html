@@ -13,7 +13,9 @@
       	<th>Promulgation Date</th>                 
     	</tr>
     	<tr ng-repeat="a in docTag.results">
-    		<td>{{a.title}}</td>
+    		<td>
+          <a ui-sref="document.show({id:a.id})">{{a.title}}</a>
+        </td>
     		<td>
           <a ng-repeat="kl in a.tags" style="padding: 0 5px;margin-right:5px;background: #ccc">{{kl}}</a>
         </td>
