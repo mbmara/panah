@@ -24,6 +24,8 @@ Rails.application.routes.draw do
           post 'documents/by_year', to: 'post#by_year'
 
           post 'post/update/:id', to: 'post#update'
+          #getMatchestag
+          get 'getTagMatch/:tag', to: 'post#getTagMatch'
 
           get 'loginAudit', to: 'audit#login'
           get 'information', to: 'home#index'
