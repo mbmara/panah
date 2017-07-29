@@ -8,7 +8,7 @@
 
         function rejectedDocumentController(DocumentFactory){
         	var pendingDoc = this;
-
+             DocumentFactory.destroy_cache();
             pendingDoc.documents = [];
         	DocumentFactory.rejected( function(res){
         		pendingDoc.documents = res.data;

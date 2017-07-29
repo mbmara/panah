@@ -10,7 +10,7 @@
         	var vm = this;
             var page = 1;
             vm.documents = [];
-
+            DocumentFactory.destroy_cache();
             vm.load_page = function(_page){
                 DocumentFactory.all( _page,function(res){
                     vm.documents = res.data.results;

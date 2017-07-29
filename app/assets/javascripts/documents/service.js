@@ -24,7 +24,15 @@
         f.home_search = home_search;
         f.byYear  = byYear;
         f.getTagMatches = getTagMatches;
+        f.destroy_cache = destroy_cache;
 
+        function destroy_cache(){
+          delete f.cache;
+          delete f.cache_search;
+          delete f.search_cache2;
+          delete f.search_cache_data;
+          console.log("cleared");
+        }
         function getTagMatches(tag,k){
           Server.get('getTagMatch/'+tag).then(k,Server.error);
         }

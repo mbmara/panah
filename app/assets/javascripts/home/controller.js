@@ -37,6 +37,7 @@
 			HomeFactory.init( function(res){
 				home.data = res.data.payload;
 				if(DocumentFactory.cache){
+					console.log(DocumentFactory.cache);
 					home.data.results = DocumentFactory.cache.results;
 					home.total = DocumentFactory.cache.total;
 				}

@@ -4,12 +4,12 @@
     angular
         .module("PANAH-APP")
         .controller("userCreateController",userCreateController)
-        userCreateController.$inject=['UserFactory','$state'];
+        userCreateController.$inject=['UserFactory','$state','DocumentFactory'];
 
-        function userCreateController( UserFactory, $state ){
+        function userCreateController( UserFactory, $state,DocumentFactory){
 
         	var newuser = this;
-
+            DocumentFactory.destroy_cache();
         	newuser.types = [];
 
         	UserFactory.types( function(res){

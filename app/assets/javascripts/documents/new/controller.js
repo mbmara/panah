@@ -13,6 +13,7 @@
                 {value:'decision', label:'Decision'},
                 {value:'opinion', label:'Opinion'}
             ];
+            DocumentFactory.destroy_cache();
             newdoc.tinymceOptions = {
                 plugins: 'link image code',
                 toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'

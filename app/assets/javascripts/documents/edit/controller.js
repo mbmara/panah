@@ -14,7 +14,7 @@
                 {value:'opinion', label:'Opinion'}
             ];
             editdoc.data = {};
-
+             DocumentFactory.destroy_cache();
             editdoc.approve = function(){
                 if(editdoc.data.tags.length==0){
                     alert("Please add tags and save changes");
