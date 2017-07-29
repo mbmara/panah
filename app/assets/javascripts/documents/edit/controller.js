@@ -3,9 +3,9 @@
 
     angular.module("PANAH-APP")
         .controller("editDocumentController",editDocumentController);
-        editDocumentController.$inject=['DocumentFactory','$state','Server'];
+        editDocumentController.$inject=['DocumentFactory','$state','Server','UserFactory'];
 
-        function editDocumentController(DocumentFactory, $state, Server){
+        function editDocumentController(DocumentFactory, $state, Server,UserFactory){
             var editdoc = this;
 
             var id = $state.params.id;
@@ -13,6 +13,19 @@
                 {value:'decision', label:'Decision'},
                 {value:'opinion', label:'Opinion'}
             ];
+            editdoc.reasign= function(){
+                UserFactory.getUser(function(res){
+                    editdoc.userlist = res.data;
+                    $('#docsReassign').modal('show');
+                })
+            }
+            editdoc.submit = function(){
+                $('#docsReassign').modal('hide');
+                DocumentFactory.reasign(editdoc.data,function(res){
+                    alert(res.data.payload);
+                    $state.go('document');
+                });
+            }
             editdoc.data = {};
              DocumentFactory.destroy_cache();
             editdoc.approve = function(){

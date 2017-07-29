@@ -23,6 +23,7 @@
                   vm.logout = logout;
 
                   function logout(){
+                        window.location.href="#";
                   	UserFactory.logout();
                   }
             

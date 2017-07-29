@@ -1,7 +1,23 @@
 class Api::V1::PostController < ApplicationController
 	before_action :validate_session, except:[:login]
 
+	def reassign
+		if @user.admin? || @user.is_allowed?
+			doc = Post.find asign_params[:id]
 
+			if doc.present?
+				doc.reviewe_id = asign_params[:assign_id]
+				doc.status = :pending
+				doc.save
+				json_response true,"Document Reassign success"
+			else
+				json_response false,"document not found"
+			end
+
+		else
+			json_response false,"Access Denied"
+		end
+	end
 	def listFilter
 		if list_params[:status].blank? || list_params[:status] == "all"
 			_sdata = Post.where("title like ?","%#{list_params[:title]}%")
@@ -117,7 +133,8 @@ class Api::V1::PostController < ApplicationController
 		end
 	end
 	def reject
-		if @user.admin? || @user.is_allowed?
+		
+		if @user.admin? || @user.is_allowed? 
 			post = Post.find params[:id]
 			if post.present?
 				post.status = :rejected
@@ -133,7 +150,8 @@ class Api::V1::PostController < ApplicationController
 	end
 
 	def update
-		if @user.admin? || @user.is_allowed?
+		post_id = Post.find update_params[:id]
+		if @user.admin? || @user.is_allowed? || post_id.reviewe_id === @user.id
 			post = Post.find update_params[:id]
 		else
 			post = @user.post.find update_params[:id]
@@ -177,9 +195,8 @@ class Api::V1::PostController < ApplicationController
 	def index
 		if @user.admin? || @user.is_allowed?
 			_sdata = Post.all
-			p _sdata.size
 		else
-			_sdata = @user.post.all
+			_sdata = Post.where("user_id = ? OR reviewe_id = ?",@user.id,@user.id)
 		end
 		@total = _sdata.size
 		@results = @total < 10 ? _sdata : _sdata.page(params[:page]).per(10)
@@ -193,16 +210,16 @@ class Api::V1::PostController < ApplicationController
 		end
 	end
 	def show
-		if @user.admin? || @user.is_allowed?
+		# if @user.admin? || @user.is_allowed?
 			#open any post
 			@post = Post.find params[:id]
 			@attachment = @post.attachments
-		else
-			#open only user post
-			@post = @user.post.find params[:id]
-			@attachment = @post.attachments
+		# else
+		# 	#open only user post
+		# 	@post = @user.post.find params[:id]
+		# 	@attachment = @post.attachments
 
-		end
+		# end
 		json_response true,{document:@post,attachments:@attachment}
 	end
 	def create
@@ -260,6 +277,9 @@ class Api::V1::PostController < ApplicationController
 
 	private
 
+	def asign_params
+		params.require(:doc).permit(:id,:assign_id)
+	end
 	def list_params
 		params.require(:search).permit(:title,:status)	
 	end

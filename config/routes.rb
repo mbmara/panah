@@ -11,12 +11,14 @@ Rails.application.routes.draw do
           post 'user/authenticate', to: 'user#authenticate'
           get 'user/profile/:id', to: 'user#profile'
           post 'user/update', to: 'user#update'
+          get 'userlist', to:'user#list'
           get 'documents/:page', to: 'post#index'
           get 'document/:id', to: 'post#show'
           post 'document/delete/:id', to:'post#delete'
           post 'document/approve/:id', to: 'post#approve'
           post 'document/reject/:id', to: 'post#reject'
-
+          post 'doc_reassign', to: 'post#reassign'
+          
           get 'pending', to: 'post#pendingDoc'
           get 'rejected', to: 'post#rejected'
           post 'documents/search', to: 'post#search'

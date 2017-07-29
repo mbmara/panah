@@ -1,6 +1,15 @@
 class Api::V1::UserController < ApplicationController
 	before_action :validate_session, except:[:login]
 	before_action :require_admin, only:[]
+
+
+	def list
+		if @user.admin? || @user.is_allowed?
+			@results = User.all;
+		else
+			json_response false,"Permission Denied"
+		end
+	end
 	def index
 		@users = User.all
 	end

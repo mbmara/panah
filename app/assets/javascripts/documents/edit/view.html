@@ -168,6 +168,31 @@
      <div class="box-footer" >
         <button ng-if="editdoc.data.status!='published'" class="btn btn-success" ng-click="editdoc.approve()">Approve</button>
         <button ng-if="editdoc.data.status!='rejected'" class="btn btn-danger" ng-click="editdoc.reject()">Reject</button>
-        <button class="btn btn-default">Re-Assign</button>
+        <button class="btn btn-default" ng-click="editdoc.reasign()">Re-Assign</button>
+        
     </div>
+</div>
+
+<div class="modal fade" id="docsReassign" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+    <form class="" ng-submit="editdoc.submit()">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Document Re Assign</h4>
+      </div>
+      <div class="modal-body">
+            <div class="form-group">
+                <select class="form-control" ng-options="a.id as a.fullname for a in editdoc.userlist" ng-model="editdoc.data.assign_id">
+                    <option value="" selected hidden disabled>-Select User-</option>
+                </select>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-success">Save</button>
+      </div>
+    </form>
+    </div>
+  </div>
 </div>

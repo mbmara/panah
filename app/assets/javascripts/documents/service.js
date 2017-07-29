@@ -28,7 +28,11 @@
         f.destroy_home_search = destroy_home_search;
         f.destroy_adv_search = destroy_adv_search;
         f.listFilter = listFilter;
+        f.reasign = reasign;
 
+        function reasign(data,k){
+          Server.post('doc_reassign',{doc:data}).then(k,Server.error);
+        }
         function listFilter(data,k){
           Server.post('listFilter',{search:data}).then(k,Server.error)
         }

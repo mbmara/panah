@@ -20,7 +20,11 @@
         f.profile = profile;
         f.updateProfile = updateProfile;
         f.loginAudit = loginAudit;
+        f.getUser = getUser;
 
+        function getUser(k){
+          Server.get('userlist').then(k,Server.error);
+        }
         function loginAudit(k){
           Server.get('loginAudit').then(k,Server.error);
         }
