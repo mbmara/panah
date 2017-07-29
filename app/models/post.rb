@@ -11,7 +11,7 @@ class Post < ApplicationRecord
 	search_scope :by_year do
 		attributes :promulgation_date
 	end
-
+	#search custom
 	search_scope :search_custom do
 		attributes :title, :author, :abstract
 	end
