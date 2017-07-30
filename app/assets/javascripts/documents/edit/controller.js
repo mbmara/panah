@@ -7,7 +7,14 @@
 
         function editDocumentController(DocumentFactory, $state, Server,UserFactory){
             var editdoc = this;
+            UserFactory.authenticate().then( function(res){
+                editdoc.admin = res.data.admin;
 
+                if(res.data.permission==1){
+                    $state.go("main");
+                    console.log(res);
+                }
+            })
             var id = $state.params.id;
             editdoc.decisions = [
                 {value:'decision', label:'Decision'},

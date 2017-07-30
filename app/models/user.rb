@@ -14,7 +14,7 @@ class User < ApplicationRecord
 		"#{lname[0]}#{fname[0]}"
 	end
 	def admin?
-		(user_type_id==4)
+		(user_type_id==4 || user_type_id == 3)
 	end
 	def is_allowed?
 		(user_type_id==3)

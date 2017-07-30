@@ -88,7 +88,7 @@
         </div>
        
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4" ng-if="editdoc.admin">
                 <div class="form-group">
                     <label for="">Tags</label>
                     <form ng-submit="editdoc.addtag(editdoc.tag)">
@@ -167,8 +167,8 @@
     </div>
      <div class="box-footer" >
         <button ng-if="editdoc.data.status!='published'" class="btn btn-success" ng-click="editdoc.approve()">Approve</button>
-        <button ng-if="editdoc.data.status!='rejected'" class="btn btn-danger" ng-click="editdoc.reject()">Reject</button>
-        <button class="btn btn-default" ng-click="editdoc.reasign()">Re-Assign</button>
+        <button ng-if="editdoc.data.status!='rejected' && editdoc.admin" class="btn btn-danger" ng-click="editdoc.reject()">Reject</button>
+        <button class="btn btn-default" ng-if="editdoc.admin" ng-click="editdoc.reasign()">Re-Assign</button>
         
     </div>
 </div>
