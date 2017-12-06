@@ -13,6 +13,10 @@
                 {value:'decision', label:'Decision'},
                 {value:'opinion', label:'Opinion'}
             ];
+            newdoc.data={
+                tags:[],
+                links:[]
+            }
             DocumentFactory.destroy_cache();
             newdoc.tinymceOptions = {
                 plugins: 'link image code',
@@ -74,8 +78,12 @@
                 getProgress(flow.files);
             }
             newdoc.addtag = function(tag){
+                
+                if(!newdoc.data.tags) newdoc.data.tags=[];
+                
                 newdoc.data.tags.push(tag);
                 newdoc.tag="";  
+                
             }
             newdoc.uploadComplete = function(){
                 newdoc.processing = false;
