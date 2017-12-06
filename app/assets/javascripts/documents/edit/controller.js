@@ -79,9 +79,9 @@
             };
             DocumentFactory.edit( id , function(res){
             	editdoc.data = res.data.payload.document;
-				editdoc.data.parties = JSON.parse(res.data.payload.document.parties);
-                editdoc.data.tags = JSON.parse(res.data.payload.document.tags);
-				editdoc.data.links = JSON.parse(res.data.payload.document.links);
+				editdoc.data.parties = JSON.parse(res.data.payload.document.parties) || [];
+                editdoc.data.tags = JSON.parse(res.data.payload.document.tags) || [];
+				editdoc.data.links = JSON.parse(res.data.payload.document.links) || [];
                 editdoc.data.attachments = res.data.payload.attachments;
             });
             editdoc.flowdata = {};
