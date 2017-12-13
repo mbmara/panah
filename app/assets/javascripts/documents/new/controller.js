@@ -20,6 +20,9 @@
             }
             DocumentFactory.destroy_cache();
             newdoc.tinymceOptions = {
+                force_br_newlines : true,
+                force_p_newlines : false,
+                forced_root_block : '', // Needed for 3.x
                 plugins: 'link image code',
                 toolbar: 'undo redo | bold italic | alignleft aligncenter alignright | code'
             };
