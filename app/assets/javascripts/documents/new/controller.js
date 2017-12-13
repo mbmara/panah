@@ -15,7 +15,8 @@
             ];
             newdoc.data={
                 tags:[],
-                links:[]
+                links:[],
+                parties:[]
             }
             DocumentFactory.destroy_cache();
             newdoc.tinymceOptions = {
